@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
                     <Link href="#" className="text-black">Muskan <span className="text-sm font-normal block">Threading</span></Link>
                 </div>
                 <div className="flex flex-col items-center space-y-4 mt-10">
-                    <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">About</Link>
+                    <Link href="/about" className="text-gray-700 hover:text-gray-900 font-medium">About</Link>
                     <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">Services</Link>
                     <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">Contact</Link>
                 </div>
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto flex items-center justify-center py-4 px-6 hidden md:flex">
                 {/* Left Side: Links */}
                 <div className="flex space-x-4 mr-12">
-                    <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">About</Link>
+                    <Link href="/about" className="text-gray-700 hover:text-gray-900 font-medium">About</Link>
                     <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">Services</Link>
                 </div>
 
