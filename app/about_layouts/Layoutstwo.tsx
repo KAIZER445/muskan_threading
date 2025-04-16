@@ -3,7 +3,7 @@ import React from 'react'
 const Layoutstwo = () => {
   return (
     <div>
-    <section className="container mx-auto p-6 py-10">
+    <section className="container mx-auto p-6 py-10 px-0 lg:px-30">
       <div className="">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
           

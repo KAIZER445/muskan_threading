@@ -45,7 +45,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
             <div className="px-20">
 
                 <div className="container mx-auto px-4 py-8">
