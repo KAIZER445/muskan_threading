@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -41,7 +43,7 @@ const Navbar: React.FC = () => {
                 <div className="flex flex-col items-center space-y-4 mt-10">
                     <Link href="/about" className="text-gray-700 hover:text-gray-900 font-medium">About</Link>
                     <Link href="/ourservices" className="text-gray-700 hover:text-gray-900 font-medium">Services</Link>
-                    <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">Contact</Link>
+                    <Link href="/contact" className="text-gray-700 hover:text-gray-900 font-medium">Contact</Link>
                 </div>
             </div>
 
@@ -61,7 +63,7 @@ const Navbar: React.FC = () => {
                 {/* Right Side: Links and Button */}
                 <div className="flex items-center space-x-4 ml-12">
                     <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">Our Team</Link>
-                    <button className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Contact US</button>
+                    <button onClick={() => router.push('/contact')} className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Contact US</button>
                 </div>
             </div>
         </nav>
