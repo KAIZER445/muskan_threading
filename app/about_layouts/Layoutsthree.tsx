@@ -4,14 +4,14 @@ import Image from 'next/image'
 const Layoutsthree = () => {
   return (
     <div>
-      <div className='container mx-auto py-20 flex flex-col items-center md:flex-row'>
+      <div className='container mx-auto py-20 flex flex-col md:flex-row px-0 lg:px-30'>
         {/* left side images */}
-        <div className="w-full md:w-1/2 px-4">
+        <div className="w-full md:w-1/2">
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <img
               src="https://img.freepik.com/free-photo/front-view-blonde-woman-uses-her-powder-brush-her-face-make-up_140725-37482.jpg?t=st=1744638772~exp=1744642372~hmac=5c0c134f536df273e51e57bd486030282849a973210867e44f4d03536b61b7dc&w=1380"
               alt=""
-              className="w-full sm:w-1/2 h-60 sm:h-120 rounded-xl object-cover shadow-md"
+              className="w-full sm:w-1/3 h-60 sm:h-120 rounded-xl object-cover shadow-md"
             />
             <div className="relative w-full sm:w-1/2">
               <img
@@ -31,7 +31,6 @@ const Layoutsthree = () => {
         {/* Right side -text and features */}
         <div className='w-full md:w-1/2'>
           <div className='p-4'>
-            <div className='pt-10'>
               <div className='inline-block border rounded-xl px-3'>
                 <div className='flex gap-1 px-2 py-1'>
                   <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +40,6 @@ const Layoutsthree = () => {
                   <p>About us</p>
                 </div>
               </div>
-            </div>
             <div className='py-5'>
               <p>The place for all your beauty needs</p>
               <p className='py-5'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error a veniam libero, perspiciatis impedit qui ipsum atque cum! Dolorum, aspernatur?</p>
