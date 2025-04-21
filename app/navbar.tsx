@@ -1,4 +1,4 @@
-// app/components/Navbar.tsx
+// app/Navbar.tsx
 "use client";
 
 import React, { useState } from 'react';
@@ -65,9 +65,6 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
         <div className="flex space-x-4 mr-12">
           <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
             About
-          </Link>
-          <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
-            Pages
           </Link>
           <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
             Our Services
