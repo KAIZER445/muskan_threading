@@ -5,46 +5,46 @@ export default function Home() {
         <>
 
             {/* Hero Section with Smoother Clip-Path and Animated Circle */}
-      <div
-        className="torn-paper bg-blue-200"
-        style={{
-          clipPath: 'polygon(0% 0%, 100% 0%, 100% 80%, 90% 81%, 80% 83%, 70% 85%, 60% 87%, 50% 89%, 40% 91%, 30% 93%, 20% 95%, 10% 97%, 0% 100%)',
-        }}
-      >
-        <div className="px-30 mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start mb-4">
-              <i className="fas fa-spa text-4xl text-pink-500"></i>
-              <div className="border-t-2 border-pink-500 w-16 ml-2"></div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-playfair font-bold mb-4">
-              Experience the Best Beauty
-            </h1>
-            <h2 className="text-4xl md:text-5xl font-playfair font-bold text-pink-500 mb-4">
-              Services
-            </h2>
-            <p className="text-gray-600 mb-8">
-              There are many variations
-            </p>
-            <a className="bg-pink-500 text-white py-2 px-6 rounded-full flex items-center justify-center inline-block" href="#">
-              <i className="fas fa-calendar-alt mr-2"></i>
-              Make Appointment
-            </a>
-          </div>
-          <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-            <div className="relative layerImage"> {/* Added layerImage class */}
-              <img
-                alt="A woman applying makeup with a brush, with a green leaf in the background"
-                className="rounded-full border-8 border-pink-100"
-                height="500"
-                src="https://storage.googleapis.com/a1aa/image/Ix2X4oDC2TdKGgYQKHwTduvNq4I8kH5PhbXfG2pSZdg.jpg"
-                width="500"
-              />
+            <div
+                className="torn-paper bg-blue-200"
+                style={{
+                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 80%, 90% 81%, 80% 83%, 70% 85%, 60% 87%, 50% 89%, 40% 91%, 30% 93%, 20% 95%, 10% 97%, 0% 100%)',
+                }}
+            >
+                <div className="px-30 mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
+                    <div className="md:w-1/2 text-center md:text-left">
+                        <div className="flex items-center justify-center md:justify-start mb-4">
+                            <i className="fas fa-spa text-4xl text-pink-500"></i>
+                            <div className="border-t-2 border-pink-500 w-16 ml-2"></div>
+                        </div>
+                        <h1 className="text-4xl md:text-5xl font-playfair font-bold mb-4">
+                            Experience the Best Beauty
+                        </h1>
+                        <h2 className="text-4xl md:text-5xl font-playfair font-bold text-pink-500 mb-4">
+                            Services
+                        </h2>
+                        <p className="text-gray-600 mb-8">
+                            There are many variations
+                        </p>
+                        <a className="bg-pink-500 text-white py-2 px-6 rounded-full flex items-center justify-center inline-block" href="#">
+                            <i className="fas fa-calendar-alt mr-2"></i>
+                            Make Appointment
+                        </a>
+                    </div>
+                    <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
+                        <div className="relative layerImage"> {/* Added layerImage class */}
+                            <img
+                                alt="A woman applying makeup with a brush, with a green leaf in the background"
+                                className="rounded-full border-8 border-pink-100"
+                                height="500"
+                                src="https://storage.googleapis.com/a1aa/image/Ix2X4oDC2TdKGgYQKHwTduvNq4I8kH5PhbXfG2pSZdg.jpg"
+                                width="500"
+                            />
 
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
             <div className="px-20">
 
@@ -65,39 +65,39 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="relative z-2 rounded-lg" >
                             <div>
-                            <div className="absolute w-full h-full z-3 rounded-lg" style={{ background: "url('./makeup.jpg')", backgroundSize: "cover" }}></div>
-                            <div className="py-25 ps-20 pe-60 z-5 relative">
-                                <h1 className="text-2xl font-bold mb-4">
-                                    Clay Masks
-                                </h1>
-                                <p className="text-gray-600 mb-4">
-                                    A good clay mask can go a long way to draw out impurities skin.
-                                </p>
-                                <a className="bg-pink-400 text-white px-4 py-2 rounded-full absolute bottom-8 inline-block" href="#">
-                                    <i className="fas fa-shopping-cart mr-2">
-                                    </i>
-                                    Shop Now
-                                </a>
-                            </div>
+                                <div className="absolute w-full h-full z-3 rounded-lg" style={{ background: "url('./makeup.jpg')", backgroundSize: "cover" }}></div>
+                                <div className="py-25 ps-20 pe-60 z-5 relative">
+                                    <h1 className="text-2xl font-bold mb-4">
+                                        Clay Masks
+                                    </h1>
+                                    <p className="text-gray-600 mb-4">
+                                        A good clay mask can go a long way to draw out impurities skin.
+                                    </p>
+                                    <a className="bg-pink-400 text-white px-4 py-2 rounded-full absolute bottom-8 inline-block" href="#">
+                                        <i className="fas fa-shopping-cart mr-2">
+                                        </i>
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
                         <div className="relative bg-blue-400 z-2 rounded-lg" >
                             <div>
-                            <div className="absolute w-full h-full z-3 ms-20 rounded-lg" style={{ background: "url('./womenbg.png')", backgroundSize: "cover", backgroundPosition:"left" }}></div>
-                            <div className="py-25 ps-20 pe-60  z-5 relative">
-                                <h1 className="text-2xl font-bold mb-4">
-                                Wellness &amp; Spa
-                                </h1>
-                                <p className="text-gray-600 mb-4">
-                                    A good clay mask can go a long way to draw out impurities skin.
-                                </p>
-                                <a className="bg-pink-400 text-white px-4 py-2 rounded-full absolute bottom-8 inline-block" href="#">
-                                    <i className="fas fa-shopping-cart mr-2">
-                                    </i>
-                                    Shop Now
-                                </a>
-                            </div>
+                                <div className="absolute w-full h-full z-3 ms-20 rounded-lg" style={{ background: "url('./womenbg.png')", backgroundSize: "cover", backgroundPosition: "left" }}></div>
+                                <div className="py-25 ps-20 pe-60  z-5 relative">
+                                    <h1 className="text-2xl font-bold mb-4">
+                                        Wellness &amp; Spa
+                                    </h1>
+                                    <p className="text-gray-600 mb-4">
+                                        A good clay mask can go a long way to draw out impurities skin.
+                                    </p>
+                                    <a className="bg-pink-400 text-white px-4 py-2 rounded-full absolute bottom-8 inline-block" href="#">
+                                        <i className="fas fa-shopping-cart mr-2">
+                                        </i>
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -249,11 +249,10 @@ export default function Home() {
                             {/* Service 4: Treatments */}
                             <div className="text-center">
                                 <div className="flex justify-center mb-4">
-                                    <svg className="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a2 2 0 012-2h2a2 2 0 012 2v5m-4 0h4">
-                                        </path>
+                                    <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.1" d="M4.44905 17.0091C-0.246262 7.83768 7.34063 0.686186 19.5547 3.61251C20.4161 3.81888 21.0082 4.6099 20.9652 5.49458C20.5863 13.288 17.0342 17.7048 6.13264 17.9858C5.43034 18.0039 4.7692 17.6344 4.44905 17.0091Z" fill="#323232" />
+                                        <path d="M4.44905 17.0091C-0.246262 7.83768 7.34063 0.686186 19.5547 3.61251C20.4161 3.81888 21.0082 4.6099 20.9652 5.49458C20.5863 13.288 17.0342 17.7048 6.13264 17.9858C5.43034 18.0039 4.7692 17.6344 4.44905 17.0091Z" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M3.99987 21C5.49993 15.5 5.99988 12.5 11.9998 9.99997" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Treatments</h3>
@@ -266,9 +265,9 @@ export default function Home() {
                 </section>
             </div>
 
-            
-            
+
+
         </>
     );
-    
+
 }
