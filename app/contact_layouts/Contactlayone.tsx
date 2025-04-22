@@ -144,7 +144,7 @@ const Contactlayone = () => {
               </svg>
             </div>
           </div>
-          <div className='opening w-full shadow-lg pb-15 rounded-b-lg'>
+          <div className='opening w-full shadow-lg pb-15'>
             <div className='flex justify-between px-3 lg:px-10 w-full py-4 pt-15'>
               <p className='uppercase font-semibold text-xl'>Opening <br /> Hours</p>
               <svg fill="#eab69f" width="50px" height="50px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
