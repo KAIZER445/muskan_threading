@@ -1,9 +1,9 @@
 // app/page.tsx
 import Head from 'next/head';
-import Hero from './hero';
-import SpaExperience from './experience';
-import Testimonials from './testimonials';
-import Features from './features';
+import Hero from './component/hero';
+import SpaExperience from './component/experience';
+import Testimonials from './component/testimonials';
+import Features from './component/features';
 
 // Define the shape of the data (removed footer since it's handled in layout.tsx)
 interface HomeData {
