@@ -16,27 +16,28 @@ interface HeroData {
   openingHours: OpeningHour[];
 }
 
-interface FormData {
-  formSubmitUrl: string;
+interface ContactInfo {
+  label: string;
+  value: string;
+  iconType: 'phone' | 'chat';
 }
 
-interface DetailsData {
-  instagramHandle: string;
-  instagramLink: string;
-  address: string;
-  phone: string;
-  email: string;
-  emailLink: string;
-  mapEmbedUrl: string; // Still included for potential future use
+interface FooterData {
+  formHeading: string;
+  formSubheading: string;
+  formButtonText: string;
+  infoHeading: string;
+  infoSubheading: string;
+  infoDescription: string;
+  contactInfo: ContactInfo[];
+  images: string[];
 }
 
 interface ContactPageData {
   hero: HeroData;
-  form: FormData;
-  details: DetailsData;
+  footer: FooterData;
 }
 
-// Fetch data from the API
 async function fetchContactData(): Promise<ContactPageData> {
   const res = await fetch('http://localhost:3000/api/contact', {
     next: { revalidate: 3600 }, // Revalidate every hour
@@ -50,7 +51,7 @@ async function fetchContactData(): Promise<ContactPageData> {
   return data;
 }
 
-export default async function Contactpage() {
+export default async function ContactPage() {
   const data = await fetchContactData();
 
   return (
@@ -68,13 +69,14 @@ export default async function Contactpage() {
           openingHours={data.hero.openingHours}
         />
         <Contactlaythree
-          instagramHandle={data.details.instagramHandle}
-          instagramLink={data.details.instagramLink}
-          address={data.details.address}
-          phone={data.details.phone}
-          email={data.details.email}
-          emailLink={data.details.emailLink}
-          formSubmitUrl={data.form.formSubmitUrl}
+          formHeading={data.footer.formHeading}
+          formSubheading={data.footer.formSubheading}
+          formButtonText={data.footer.formButtonText}
+          infoHeading={data.footer.infoHeading}
+          infoSubheading={data.footer.infoSubheading}
+          infoDescription={data.footer.infoDescription}
+          contactInfo={data.footer.contactInfo}
+          images={data.footer.images}
         />
       </div>
     </>
