@@ -15,6 +15,12 @@ interface ContactLayOneProps {
 
 const Contactlayone: React.FC<ContactLayOneProps> = ({ title, description, services, addressLines, openingHours }) => {
   return (
+    <div className='container mx-auto px-1 lg:px-30'>
+      <div className='grid grid-cols-1 md:grid-cols-5 gap-6'>
+        <div className='md:col-span-3'>
+          <div className='lg:pt-20 pt-3'>
+            <h1 className='font-semibold text-3xl uppercase px-10 leading-relaxed tracking-wide'>A Gentle Touch Away <br /> from Muskan</h1>
+            <p className='px-10 pt-10 text-justify text-lg leading-relaxed'>Transform your beauty aspirations into a reality with Muskan Threading. Whether you're looking for a subtle touch-up or a complete glam makeover, we are here to make it happen. At Muskan Threading, we pride ourselves on offering a personalized experience, where each client is treated with the utmost care, warmth, and precision. Reach out to us today, we look forward to connecting with you and enhancing your natural beauty.</p>
     <div className="container mx-auto px-1 lg:px-32">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="lg:pt-15">
@@ -45,81 +51,11 @@ const Contactlayone: React.FC<ContactLayOneProps> = ({ title, description, servi
               />
             </div>
           </div>
-        </div>
-        <div className="lg:pt-25 lg:px-0 px-2">
-          <h1 className="text-xl capitalize pt-5 leading-relaxed">{description}</h1>
-          <ul className="list-[square] pl-4 py-3 pt-6">
-            {services.map((service, index) => (
-              <li key={index} className="py-1 text-lg">{service}</li>
-            ))}
-          </ul>
-          <div className="flex gap-4 pt-6">
-            <div className="bg-[#fbf4f0] inline-block rounded-lg py-2">
-              <div className="flex items-center gap-2 px-3 py-4">
-                <svg
-                  version="1.1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 32 32"
-                  enableBackground="new 0 0 32 32"
-                >
-                  <g>
-                    <path
-                      fill="#df8f6c"
-                      d="M25.5,29c1.93,0,3.5-1.57,3.5-3.5S27.43,22,25.5,22S22,23.57,22,25.5S23.57,29,25.5,29z M25.5,23
-		c1.378,0,2.5,1.121,2.5,2.5S26.878,28,25.5,28S23,26.879,23,25.5S24.122,23,25.5,23z"
-                    />
-                    <path
-                      fill="#df8f6c"
-                      d="M18.732,23.95c0,1.451,0.357,3.271,0.836,4.301C20.548,30.738,22.476,32,25.3,32c3.694,0,6.7-3.006,6.7-6.7
-		c0-3.593-2.818-6.2-6.7-6.2c-4.413,0-5.853-2.371-5.91-2.469c-0.02-0.034-0.043-0.066-0.07-0.095L3.965,0.158
-		c-0.14-0.149-0.358-0.197-0.549-0.123C3.226,0.11,3.1,0.295,3.1,0.5c0,9.651,6.436,14.715,11.135,18.411
-		C16.748,20.888,18.732,22.448,18.732,23.95z M4.144,1.811l14.412,15.372C18.824,17.607,20.6,20.1,25.3,20.1
-		c3.303,0,5.7,2.187,5.7,5.2c0,3.144-2.557,5.7-5.7,5.7c-2.405,0-3.976-1.02-4.813-3.144c-0.366-0.786-0.755-2.423-0.755-3.906
-		c0-1.987-2.153-3.681-4.878-5.825C10.537,14.729,4.702,10.14,4.144,1.811z"
-                    />
-                    <path
-                      fill="#df8f6c"
-                      d="M3,25.5C3,27.43,4.57,29,6.5,29s3.5-1.57,3.5-3.5S8.43,22,6.5,22S3,23.57,3,25.5z M9,25.5
-		C9,26.879,7.878,28,6.5,28S4,26.879,4,25.5S5.122,23,6.5,23S9,24.121,9,25.5z"
-                    />
-                    <path
-                      fill="#df8f6c"
-                      d="M20.634,15.471c-0.204,0.186-0.219,0.502-0.033,0.706c0.099,0.108,0.234,0.163,0.37,0.163
-		c0.12,0,0.241-0.043,0.337-0.131C24.843,12.989,28.9,8.294,28.9,0.5c0-0.205-0.125-0.39-0.316-0.465
-		c-0.19-0.073-0.408-0.026-0.549,0.123l-10.92,11.646c-0.189,0.201-0.179,0.518,0.023,0.706c0.201,0.188,0.517,0.18,0.707-0.022
-		l10.014-10.68C27.433,8.438,23.813,12.574,20.634,15.471z"
-                    />
-                    <path
-                      fill="#df8f6c"
-                      d="M10.911,18.896c0.257-0.1,0.385-0.389,0.286-0.646s-0.39-0.387-0.647-0.285
-		c-0.211,0.082-0.439,0.183-0.684,0.292C9.022,18.632,7.971,19.1,6.7,19.1c-3.882,0-6.7,2.607-6.7,6.2C0,28.994,3.006,32,6.7,32
-		c2.824,0,4.752-1.262,5.719-3.722C12.925,27.193,13,24.818,13,23.5c0-0.269,0.762-0.843,1.218-1.186
-		c0.421-0.316,0.856-0.644,1.156-0.982c0.183-0.207,0.164-0.523-0.042-0.706c-0.206-0.184-0.523-0.164-0.706,0.042
-		c-0.234,0.265-0.628,0.561-1.01,0.848C12.785,22.142,12,22.732,12,23.5c0,2.072-0.182,3.701-0.499,4.384
-		C10.676,29.98,9.105,31,6.7,31C3.557,31,1,28.443,1,25.3c0-3.014,2.397-5.2,5.7-5.2c1.484,0,2.691-0.538,3.573-0.931
-		C10.501,19.067,10.714,18.973,10.911,18.896z"
-                    />
-                    <circle fill="#df8f6c" cx="16" cy="16.984" r="0.806" />
-                  </g>
-                </svg>
-                <p className="uppercase font-bold mb-0">Hair Cutting</p>
-              </div>
-            </div>
-            <div className="bg-[#fbf4f0] inline-block rounded-lg py-2">
-              <div className="flex items-center gap-2 px-3 py-4">
-                <svg
-                  fill="currentcolor"
-                  height="30px"
-                  width="30px"
-                  version="1.1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512.002 512.002"
-                  className="text-[#df8f6c]"
-                >
+          <div className='pt-15 px-10 flex gap-6'>
+            <div className='border inline-block rounded-lg bg-[#f1e9e1] border-gray-400 border-3'>
+              <div className='flex items-center gap-5 px-3 py-5'>
+                <svg fill="#000000" height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512.002 512.002">
                   <g>
                     <g>
                       <path
@@ -159,87 +95,100 @@ const Contactlayone: React.FC<ContactLayOneProps> = ({ title, description, servi
                     </g>
                   </g>
                 </svg>
-                <p className="uppercase font-bold mb-0">Hair Color</p>
+                <p className='uppercase font-bold'>hair color</p>
+              </div>
+            </div>
+            <div className='border inline-block rounded-lg bg-[#f1e9e1] border-gray-400 border-3'>
+              <div className='flex items-center gap-5 px-4 py-5'>
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                  width="40px" height="40px" viewBox="0 0 32 32" enable-background="new 0 0 32 32">
+                  <g>
+                    <path fill="#828282" d="M25.5,29c1.93,0,3.5-1.57,3.5-3.5S27.43,22,25.5,22S22,23.57,22,25.5S23.57,29,25.5,29z M25.5,23
+		c1.378,0,2.5,1.121,2.5,2.5S26.878,28,25.5,28S23,26.879,23,25.5S24.122,23,25.5,23z"/>
+                    <path fill="#828282" d="M18.732,23.95c0,1.451,0.357,3.271,0.836,4.301C20.548,30.738,22.476,32,25.3,32c3.694,0,6.7-3.006,6.7-6.7
+		c0-3.593-2.818-6.2-6.7-6.2c-4.413,0-5.853-2.371-5.91-2.469c-0.02-0.034-0.043-0.066-0.07-0.095L3.965,0.158
+		c-0.14-0.149-0.358-0.197-0.549-0.123C3.226,0.11,3.1,0.295,3.1,0.5c0,9.651,6.436,14.715,11.135,18.411
+		C16.748,20.888,18.732,22.448,18.732,23.95z M4.144,1.811l14.412,15.372C18.824,17.607,20.6,20.1,25.3,20.1
+		c3.303,0,5.7,2.187,5.7,5.2c0,3.144-2.557,5.7-5.7,5.7c-2.405,0-3.976-1.02-4.813-3.144c-0.366-0.786-0.755-2.423-0.755-3.906
+		c0-1.987-2.153-3.681-4.878-5.825C10.537,14.729,4.702,10.14,4.144,1.811z"/>
+                    <path fill="#828282" d="M3,25.5C3,27.43,4.57,29,6.5,29s3.5-1.57,3.5-3.5S8.43,22,6.5,22S3,23.57,3,25.5z M9,25.5
+		C9,26.879,7.878,28,6.5,28S4,26.879,4,25.5S5.122,23,6.5,23S9,24.121,9,25.5z"/>
+                    <path fill="#828282" d="M20.634,15.471c-0.204,0.186-0.219,0.502-0.033,0.706c0.099,0.108,0.234,0.163,0.37,0.163
+		c0.12,0,0.241-0.043,0.337-0.131C24.843,12.989,28.9,8.294,28.9,0.5c0-0.205-0.125-0.39-0.316-0.465
+		c-0.19-0.073-0.408-0.026-0.549,0.123l-10.92,11.646c-0.189,0.201-0.179,0.518,0.023,0.706c0.201,0.188,0.517,0.18,0.707-0.022
+		l10.014-10.68C27.433,8.438,23.813,12.574,20.634,15.471z"/>
+                    <path fill="#828282" d="M10.911,18.896c0.257-0.1,0.385-0.389,0.286-0.646s-0.39-0.387-0.647-0.285
+		c-0.211,0.082-0.439,0.183-0.684,0.292C9.022,18.632,7.971,19.1,6.7,19.1c-3.882,0-6.7,2.607-6.7,6.2C0,28.994,3.006,32,6.7,32
+		c2.824,0,4.752-1.262,5.719-3.722C12.925,27.193,13,24.818,13,23.5c0-0.269,0.762-0.843,1.218-1.186
+		c0.421-0.316,0.856-0.644,1.156-0.982c0.183-0.207,0.164-0.523-0.042-0.706c-0.206-0.184-0.523-0.164-0.706,0.042
+		c-0.234,0.265-0.628,0.561-1.01,0.848C12.785,22.142,12,22.732,12,23.5c0,2.072-0.182,3.701-0.499,4.384
+		C10.676,29.98,9.105,31,6.7,31C3.557,31,1,28.443,1,25.3c0-3.014,2.397-5.2,5.7-5.2c1.484,0,2.691-0.538,3.573-0.931
+		C10.501,19.067,10.714,18.973,10.911,18.896z"/>
+                    <circle fill="#828282" cx="16" cy="16.984" r="0.806" />
+                  </g>
+                </svg>
+                <p className='uppercase font-bold'>hair cut</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="mb-5 lg:mb-0 lg:px-0 px-2">
-          <div className="bg-[#df8e6a] text-white font-bold py-7 shadow-lg relative overflow-hidden">
-            <div className="px-3 lg:px-10">
-              {addressLines.map((line, index) => (
-                <p key={index} className="py-2">{line}</p>
-              ))}
-            </div>
-            <div className="absolute -right-5 -bottom-5">
-              <svg
-                fill="#ffff"
-                version="1.1"
-                id="Capa_1"
-                xmlns="http://www.w3.org/2000/svg"
-                width="110px"
-                height="110px"
-                viewBox="0 0 31.603 31.603"
-                className="opacity-20"
-              >
-                <g>
+        <div className='md:col-span-2 mb-10'>
+          <div className='mb-5 lg:mb-0 lg:px-0 px-2'>
+            <div className='bg-[#df8e6a] text-white font-bold py-7 shadow-lg relative overflow-hidden'>
+              <div className='px-3 lg:px-10'>
+                <p className='py-2'>66 Broklyn Golden Street Line</p>
+                <p className='py-2'>New York, United States of</p>
+                <p className='py-2'>America</p>
+              </div>
+              <div className='absolute -right-5  -bottom-5'>
+                <svg fill="#ffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  width="110px" height="110px" viewBox="0 0 31.603 31.603" className='opacity-20'>
                   <g>
-                    <path
-                      d="M7.703,15.973c0,0,5.651-5.625,5.651-10.321C13.354,2.53,10.824,0,7.703,0S2.052,2.53,2.052,5.652
+                    <g>
+                      <path d="M7.703,15.973c0,0,5.651-5.625,5.651-10.321C13.354,2.53,10.824,0,7.703,0S2.052,2.53,2.052,5.652
 			C2.052,10.614,7.703,15.973,7.703,15.973z M4.758,5.652c0-1.628,1.319-2.946,2.945-2.946s2.945,1.318,2.945,2.946
-			c0,1.626-1.319,2.944-2.945,2.944S4.758,7.278,4.758,5.652z"
-                    />
-                    <path
-                      d="M28.59,7.643l-0.459,0.146l-2.455,0.219l-0.692,1.106l-0.501-0.16l-1.953-1.76l-0.285-0.915l-0.377-0.977L20.639,4.2
+			c0,1.626-1.319,2.944-2.945,2.944S4.758,7.278,4.758,5.652z"/>
+                      <path d="M28.59,7.643l-0.459,0.146l-2.455,0.219l-0.692,1.106l-0.501-0.16l-1.953-1.76l-0.285-0.915l-0.377-0.977L20.639,4.2
 			l-1.446-0.283L19.159,4.58l1.418,1.384l0.694,0.817l-0.782,0.408l-0.636-0.188l-0.951-0.396l0.033-0.769l-1.25-0.514L17.27,7.126
 			l-1.258,0.286l0.125,1.007l1.638,0.316l0.284-1.609l1.353,0.201l0.629,0.368h1.011l0.69,1.384l1.833,1.859l-0.134,0.723
 			l-1.478-0.189l-2.553,1.289l-1.838,2.205l-0.239,0.976h-0.661l-1.229-0.566l-1.194,0.566l0.297,1.261l0.52-0.602l0.913-0.027
 			l-0.064,1.132l0.757,0.22l0.756,0.85l1.234-0.347l1.41,0.222l1.636,0.441l0.819,0.095l1.384,1.573l2.675,1.574l-1.729,3.306
 			l-1.826,0.849l-0.693,1.889l-2.643,1.765l-0.282,1.019c6.753-1.627,11.779-7.693,11.779-14.95
-			C31.194,13.038,30.234,10.09,28.59,7.643z"
-                    />
-                    <path
-                      d="M17.573,24.253l-1.12-2.078l1.028-2.146l-1.028-0.311l-1.156-1.159l-2.56-0.573l-0.85-1.779v1.057h-0.375l-1.625-2.203
+			C31.194,13.038,30.234,10.09,28.59,7.643z"/>
+                      <path d="M17.573,24.253l-1.12-2.078l1.028-2.146l-1.028-0.311l-1.156-1.159l-2.56-0.573l-0.85-1.779v1.057h-0.375l-1.625-2.203
 			c-0.793,0.949-1.395,1.555-1.47,1.629L7.72,17.384l-0.713-0.677c-0.183-0.176-3.458-3.315-5.077-7.13
 			c-0.966,2.009-1.52,4.252-1.52,6.63c0,8.502,6.891,15.396,15.393,15.396c0.654,0,1.296-0.057,1.931-0.135l-0.161-1.864
-			c0,0,0.707-2.77,0.707-2.863C18.28,26.646,17.573,24.253,17.573,24.253z"
-                    />
-                    <path
-                      d="M14.586,3.768l1.133,0.187l2.75-0.258l0.756-0.834l1.068-0.714l1.512,0.228l0.551-0.083
+			c0,0,0.707-2.77,0.707-2.863C18.28,26.646,17.573,24.253,17.573,24.253z"/>
+                      <path d="M14.586,3.768l1.133,0.187l2.75-0.258l0.756-0.834l1.068-0.714l1.512,0.228l0.551-0.083
 			c-1.991-0.937-4.207-1.479-6.553-1.479c-1.096,0-2.16,0.128-3.191,0.345c0.801,0.875,1.377,1.958,1.622,3.163L14.586,3.768z
-			 M16.453,2.343l1.573-0.865l1.009,0.582l-1.462,1.113l-1.394,0.141L15.55,2.907L16.453,2.343z"
-                    />
+			 M16.453,2.343l1.573-0.865l1.009,0.582l-1.462,1.113l-1.394,0.141L15.55,2.907L16.453,2.343z"/>
+                    </g>
                   </g>
-                </g>
-              </svg>
+                </svg>
+              </div>
             </div>
-          </div>
-          <div className="opening w-full shadow-lg pb-15">
-            <div className="flex justify-between px-3 lg:px-10 w-full py-4 pt-15">
-              <p className="uppercase font-semibold text-xl">
-                Opening <br /> Hours
-              </p>
-              <svg
-                fill="#eab69f"
-                width="50px"
-                height="50px"
-                viewBox="0 0 32 32"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>clock</title>
-                <path
-                  d="M0 7.008q0 1.856 0.992 3.52 1.184-3.328 3.712-5.824t5.824-3.712q-1.696-0.992-3.52-0.992-2.912 0-4.96 2.080t-2.048 4.928zM2.016 16q0 2.784 1.056 5.312t2.944 4.48v4.224q0 0.832 0.576 1.408t1.408 0.576 1.408-0.576 0.608-1.408v-1.408q2.912 1.408 5.984 1.408t6.016-1.408v1.408q0 0.832 0.576 1.408t1.408 0.576 1.408-0.576 0.608-1.408v-4.224q1.888-1.952 2.944-4.448t1.056-5.344-1.12-5.44-2.976-4.48-4.48-2.976-5.44-1.12-5.44 1.12-4.48 2.976-2.976 4.48-1.088 5.44zM6.016 16q0-2.048 0.768-3.872t2.144-3.2 3.2-2.144 3.872-0.8q2.72 0 5.024 1.344t3.648 3.648 1.344 5.024q0 2.016-0.8 3.872t-2.144 3.2-3.2 2.144-3.872 0.768q-2.72 0-5.024-1.312t-3.616-3.648-1.344-5.024zM14.016 16q0 0.832 0.576 1.408t1.408 0.576h4q0.832 0 1.408-0.576t0.608-1.408-0.608-1.408-1.408-0.608h-1.984v-1.984q0-0.832-0.608-1.408t-1.408-0.608-1.408 0.608-0.576 1.408v4zM21.472 0.992q3.328 1.216 5.824 3.712t3.712 5.824q0.992-1.664 0.992-3.52 0-2.88-2.048-4.928t-4.96-2.080q-1.824 0-3.52 0.992z"
-                ></path>
-              </svg>
-            </div>
-            <div className="px-3 lg:px-10">
-              {openingHours.map((hour, index) => (
-                <div key={index} className="py-3">
-                  <p className="uppercase text-[#a9a5a4]">{hour.day}</p>
-                  <p className="text-[#df8e6a] font-bold text-lg">{hour.time}</p>
+            <div className='opening w-full shadow-lg pb-15'>
+              <div className='flex justify-between px-3 lg:px-10 w-full py-4 pt-15'>
+                <p className='uppercase font-semibold text-xl'>Opening <br /> Hours</p>
+                <svg fill="#eab69f" width="50px" height="50px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <title>clock</title>
+                  <path d="M0 7.008q0 1.856 0.992 3.52 1.184-3.328 3.712-5.824t5.824-3.712q-1.696-0.992-3.52-0.992-2.912 0-4.96 2.080t-2.048 4.928zM2.016 16q0 2.784 1.056 5.312t2.944 4.48v4.224q0 0.832 0.576 1.408t1.408 0.576 1.408-0.576 0.608-1.408v-1.408q2.912 1.408 5.984 1.408t6.016-1.408v1.408q0 0.832 0.576 1.408t1.408 0.576 1.408-0.576 0.608-1.408v-4.224q1.888-1.952 2.944-4.448t1.056-5.344-1.12-5.44-2.976-4.48-4.48-2.976-5.44-1.12-5.44 1.12-4.48 2.976-2.976 4.48-1.088 5.44zM6.016 16q0-2.048 0.768-3.872t2.144-3.2 3.2-2.144 3.872-0.8q2.72 0 5.024 1.344t3.648 3.648 1.344 5.024q0 2.016-0.8 3.872t-2.144 3.2-3.2 2.144-3.872 0.768q-2.72 0-5.024-1.312t-3.616-3.648-1.344-5.024zM14.016 16q0 0.832 0.576 1.408t1.408 0.576h4q0.832 0 1.408-0.576t0.608-1.408-0.608-1.408-1.408-0.608h-1.984v-1.984q0-0.832-0.608-1.408t-1.408-0.608-1.408 0.608-0.576 1.408v4zM21.472 0.992q3.328 1.216 5.824 3.712t3.712 5.824q0.992-1.664 0.992-3.52 0-2.88-2.048-4.928t-4.96-2.080q-1.824 0-3.52 0.992z"></path>
+                </svg>
+              </div>
+              <div className='px-3 lg:px-10'>
+                <div className='py-3'>
+                  <p className='uppercase text-[#a9a5a4]'>Monday</p>
+                  <p className='text-[#df8e6a] font-bold text-lg'>12:00 pm - 19:00 pm</p>
                 </div>
-              ))}
+                <div className='py-3'>
+                  <p className='uppercase text-[#a9a5a4]'>tuesday to friday</p>
+                  <p className='text-[#df8e6a] font-bold text-lg'>8:00 am - 19:00 pm</p>
+                </div>
+                <div className='py-3'>
+                  <p className='uppercase text-[#a9a5a4]'>saturday</p>
+                  <p className='text-[#df8e6a] font-bold text-lg'>8:00 am - 3:30 pm</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -248,4 +197,4 @@ const Contactlayone: React.FC<ContactLayOneProps> = ({ title, description, servi
   );
 };
 
-export default Contactlayone;
+export default Contactlayone
