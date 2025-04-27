@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Contactlayone from '../contact_layouts/Contactlayone';
-import Contactlaytwo from '../contact_layouts/Contactlaytwo';
 import Contactlaythree from '../contact_layouts/Contactlaythree';
 
 // Define the data structure for the API response
@@ -21,11 +20,6 @@ interface FormData {
   formSubmitUrl: string;
 }
 
-interface SalonHour {
-  day: string;
-  time: string;
-}
-
 interface DetailsData {
   instagramHandle: string;
   instagramLink: string;
@@ -33,8 +27,7 @@ interface DetailsData {
   phone: string;
   email: string;
   emailLink: string;
-  mapEmbedUrl: string;
-  salonHours: SalonHour[];
+  mapEmbedUrl: string; // Still included for potential future use
 }
 
 interface ContactPageData {
@@ -62,6 +55,10 @@ export default async function Contactpage() {
 
   return (
     <>
+      <Head>
+        <title>Contact Us - Muskan Threading</title>
+        <meta name="description" content={data.hero.description} />
+      </Head>
       <div>
         <Contactlayone
           title={data.hero.title}
@@ -69,12 +66,6 @@ export default async function Contactpage() {
           services={data.hero.services}
           addressLines={data.hero.addressLines}
           openingHours={data.hero.openingHours}
-        />
-        <Contactlaytwo
-          address={data.details.address}
-          phone={data.details.phone}
-          email={data.details.email}
-          salonHours={data.details.salonHours}
         />
         <Contactlaythree
           instagramHandle={data.details.instagramHandle}
