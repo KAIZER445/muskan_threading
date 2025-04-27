@@ -8,7 +8,6 @@ const Contactpage = () => {
   return (
     <div>
      <Contactlayone />
-     <Contactlaytwo />
      <Contactlaythree />
     </div>
   )
