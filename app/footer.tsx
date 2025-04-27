@@ -50,17 +50,17 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
   } = footerData || {};
 
   return (
-    <div className="text-black ">
+    <div className="text-white mt-10">
       <footer
-        className="px-20 pt-10 pb-10 bg-yellow-600"
+        className="px-20 pt-22 pb-10 bg-gray-900"
         style={{
-          backgroundImage: 'url(./footer-img/footer-bg.png)',
+          backgroundImage: '',
           backgroundSize: 'cover',
         }}
       >
-        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
+        <div className=" md:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
           <div className="flex-1">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-12">
               <img
                 alt={logo_alt}
                 className="mr-2"
@@ -68,33 +68,20 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
                 src={logo_url}
                 width="50"
               />
-              <div>
-                <h1 className="text-2xl font-bold text-black">HairCutter</h1>
-                <p className="text-sm text-black">BARBER SHOP</p>
+              <div className=''>
+                <h1 className="text-2xl font-bold text-white">HairCutter</h1>
+                <p className="text-sm text-white">BARBER SHOP</p>
               </div>
             </div>
-            <p className="mb-4 text-black">{description}</p>
-            <div className="flex">
-              <input
-                className="p-2 rounded-l bg-white text-black"
-                placeholder="Enter Your Email address"
-                type="email"
-              />
-              <a
-                className="bg-orange-500 p-2 rounded-r inline-block"
-                href="/subscribe"
-                aria-label="Subscribe to newsletter"
-              >
-                <i className="fas fa-paper-plane text-white px-2"></i>
-              </a>
-            </div>
+            <p className="mb-4 text-white mb-15">{description}</p>
+
           </div>
-          <div className="flex-1">
-            <h2 className="text-xl font-bold mb-4 text-black">USEFUL LINKS</h2>
+          <div className="flex-1 md:ps-15">
+            <h2 className="text-xl font-bold mb-10 text-white">USEFUL LINKS</h2>
             <ul className="space-y-2">
               {useful_links.map((link, index) => (
-                <li key={index}>
-                  <a className="hover:underline text-black" href={link.url}>
+                <li key={index} className='mb-5'>
+                  <a className="hover:underline text-white " href={link.url}>
                     {link.name}
                   </a>
                 </li>
@@ -102,24 +89,24 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
             </ul>
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold mb-4 text-black">CONTACT US</h2>
-            <p className="mb-2 text-black">
+            <h2 className="text-xl font-bold mb-4 text-white mb-10">CONTACT US</h2>
+            <p className="mb-2 text-white">
               <span className="font-bold">Phone:</span> {contact_phone}
             </p>
-            <p className="mb-2 text-black">
+            <p className="mb-2 text-white">
               <span className="font-bold">Fax:</span> {contact_fax}
             </p>
-            <p className="mb-2 text-black">
+            <p className="mb-2 text-white">
               <span className="font-bold">Email:</span>{' '}
               <a href={`mailto:${contact_email}`} className="hover:underline">
                 {contact_email}
               </a>
             </p>
-            <p className="mb-2 text-black">{contact_address}</p>
+            <p className="mb-2 text-white">{contact_address}</p>
           </div>
         </div>
       </footer>
-      <div className="bg-gray-800 py-4">
+      <div className="bg-gray-900 py-4">
         <div className="container mx-auto px-4 text-center">
           <p className="text-white">
             Copyright © {currentYear}, Muskan Threading Powered by{' '}

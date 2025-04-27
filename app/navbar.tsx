@@ -66,9 +66,6 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
           <Link href="/about" className="text-gray-700 hover:text-gray-900 font-medium">
             About
           </Link>
-          <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
-            Pages
-          </Link>
           <Link href="/ourservices" className="text-gray-700 hover:text-gray-900 font-medium">
             Our Services
           </Link>
@@ -79,13 +76,12 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
           </Link>
         </div>
         <div className="flex items-center space-x-4 ml-12">
-          <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
-            Gallery
+          <Link href="/teams" className="text-gray-700 hover:text-gray-900 font-medium">
+            Our Team
           </Link>
-          <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
-            Booking
+          <Link href="/contact" className="text-gray-700 hover:text-gray-900 font-medium">
+            Contact US
           </Link>
-          <button className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Contact</button>
         </div>
       </div>
     </nav>

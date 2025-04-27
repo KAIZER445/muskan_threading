@@ -47,7 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body>
-        <Navbar menuItems={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }]} />
+        <Navbar menuItems={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }, { name: 'Our Services', url: '/ourservices' }, { name: 'Our Team', url: '/teams' }, { name: 'Contact US', url: '/contact' }]} />
         {children}
         <Footer footerData={footerData} />
       </body>

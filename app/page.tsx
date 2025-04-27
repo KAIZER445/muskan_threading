@@ -84,8 +84,12 @@ export default async function Page() {
 
       <Hero hero={hero} />
       <div className="container mx-auto px-4">
+        <div  className="mb-16">
         <SpaExperience main={main} services={services} />
+        </div>
+        <div  className="mb-16">
         <Testimonials testimonials={testimonials} />
+        </div>
         <Features features={features} />
       </div>
     </>

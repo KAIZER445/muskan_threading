@@ -1,29 +1,51 @@
-import React from 'react'
+import React from 'react';
+import Image from 'next/image';
 
-const Layoutsone = () => {
-  return (
-      <div className="container mx-auto mb-10 mt-10 px-0 lg:px-30">
-        <div className='flex flex-col md:flex-row gap-4'>
-        <div className='w-full md:w-1/2 p-5'>
-        <img src="https://img.freepik.com/free-photo/african-american-woman-applying-makeup-by-makeup-artist-beauty-saloon_627829-4589.jpg?t=st=1744528461~exp=1744532061~hmac=7c0a344104203af969f9aad24dfa4fd7508193e06c0f66c2c8ea65ce6385d77b&w=1380" alt="girl with brush" className='w-full h-full rounded-lg shadow-lg border border-grey-300 transition-transform duration-300 hover:scale-102'/>
-        </div>
-        <div className='w-full md:w-1/2 px-5'>
-            <h1 className='text-5xl font-bold mb-4 pt-2'>About Us</h1>
-            <p className='font-bold tracking-widest text-lg pt-2'>Get To Know About Us</p>
-            <p className='text-base pt-5 text-justify'>Looks <span className='font-bold'>Threading Beauty Salon</span> is a place where you can bring
-                     yourself to love your face all the more with our beauty services.
-                     We provide a long list of services and make sure that we deliver
-                     the best quality of service. We have highly trained and
-                     experienced beauticians who have honed their skills with the
-                     time they have spent in the self-care industry. If you are looking
-                     for reliable and trustworthy beautification services, we are here to
-                     fulfill all your needs. All you have to do is contact us and we will
-                     assist you in every possible way. Welcome to the world of glamour
-                     and beauty where you fall in love with yourself.</p>
-        </div>
-        </div>
-      </div>
-  )
+interface LayoutOneProps {
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
 }
 
-export default Layoutsone
+const Layoutsone: React.FC<LayoutOneProps> = ({ title, subtitle, description, image }) => {
+  return (
+    <div className="container mx-auto py-20 flex flex-col md:flex-row px-0 lg:px-32">
+      {/* Left side - text */}
+      <div className="w-full md:w-1/2 p-4">
+        <div className="inline-block border rounded-xl px-3">
+          <div className="flex gap-1 px-2 py-1">
+            <svg
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,8,17,8,17,8Z" />
+              <rect width="24" height="24" fill="none" />
+            </svg>
+            <p>About us</p>
+          </div>
+        </div>
+        <div className="py-5">
+          <h1 className="text-3xl font-bold">{title}</h1>
+          <h2 className="text-xl text-gray-600 py-2">{subtitle}</h2>
+          <p className="py-5">{description}</p>
+        </div>
+      </div>
+
+      {/* Right side - image */}
+      <div className="w-full md:w-1/2 p-4">
+        <Image
+          src={image}
+          alt="About us image"
+          width={600}
+          height={400}
+          className="rounded-xl shadow-md object-cover"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Layoutsone;
