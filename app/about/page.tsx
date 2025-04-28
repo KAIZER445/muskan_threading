@@ -9,7 +9,7 @@ interface LayoutOneData {
   title: string;
   subtitle: string;
   description: string;
-  image: string;
+  image: string | null; // Allow null for image
 }
 
 interface TimelineItem {
@@ -24,27 +24,77 @@ interface LayoutTwoData {
 
 interface Feature {
   name: string;
-  icon: string;
+  icon?: string; // Make icon optional since API doesn't provide it
 }
 
 interface LayoutThreeData {
   title: string;
   description: string;
-  features: Feature[];
-  image1: string;
-  image2: string;
-  towel_icon: string;
+  features: Feature[]; // Array of features
+  image1: string | null; // Allow null for images
+  image2: string | null;
+  towel_icon?: string; // Make towel_icon optional
 }
 
-interface AboutPageData {
-  layoutOne: LayoutOneData;
-  layoutTwo: LayoutTwoData;
-  layoutThree: LayoutThreeData;
+// API response structure
+interface ApiResponse {
+  layout_one: {
+    layout_one_about_title: string;
+    layout_one_about_subtitle: string;
+    layout_one_about_description: string;
+    layout_one_about_main_image: string | null;
+  };
+  layout_three: {
+    layout_three_about_title: string;
+    layout_three_about_description: string;
+    layout_three_about_features_1: string;
+    layout_three_about_features_2: string;
+    layout_three_about_features_3: string;
+    layout_three_about_features_4: string;
+    layout_three_about_features_5: string;
+    layout_three_about_features_6: string;
+    layout_three_about_features_7: string;
+    layout_three_about_features_8: string;
+    layout_three_about_image1: string | null;
+    layout_three_about_image2: string | null;
+  };
+}
+
+// Transform API data to match component expectations
+function transformApiData(apiData: ApiResponse): AboutPageData {
+  return {
+    layoutOne: {
+      title: apiData.layout_one.layout_one_about_title,
+      subtitle: apiData.layout_one.layout_one_about_subtitle,
+      description: apiData.layout_one.layout_one_about_description,
+      image: apiData.layout_one.layout_one_about_main_image,
+    },
+    layoutTwo: {
+      timeline: [], // Provide a default empty timeline since API doesn't include layout_two
+    },
+    layoutThree: {
+      title: apiData.layout_three.layout_three_about_title,
+      description: apiData.layout_three.layout_three_about_description,
+      features: [
+        { name: apiData.layout_three.layout_three_about_features_1 },
+        { name: apiData.layout_three.layout_three_about_features_2 },
+        { name: apiData.layout_three.layout_three_about_features_3 },
+        { name: apiData.layout_three.layout_three_about_features_4 },
+        { name: apiData.layout_three.layout_three_about_features_5 },
+        { name: apiData.layout_three.layout_three_about_features_6 },
+        { name: apiData.layout_three.layout_three_about_features_7 },
+        { name: apiData.layout_three.layout_three_about_features_8 },
+      ],
+      image1: apiData.layout_three.layout_three_about_image1,
+      image2: apiData.layout_three.layout_three_about_image2,
+      towel_icon: '', // Provide a default or empty string since API doesn't include it
+    },
+  };
 }
 
 // Fetch data from the API
 async function fetchAboutData(): Promise<AboutPageData> {
-  const res = await fetch('https://backend.muskanthreading.com/api/homepage', {
+  const res = await fetch('https://backend.muskanthreading.com/api/aboutpage', {
     next: { revalidate: 3600 }, // Revalidate every hour
   });
 
@@ -52,8 +102,8 @@ async function fetchAboutData(): Promise<AboutPageData> {
     throw new Error('Failed to fetch about page data');
   }
 
-  const data: AboutPageData = await res.json();
-  return data;
+  const apiData: ApiResponse = await res.json();
+  return transformApiData(apiData.data); // Transform the nested 'data' object
 }
 
 export default async function AboutPage() {

@@ -71,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
           </Link>
         </div>
         <div className="text-2xl font-bold">
-          <Link href="#" className="text-black">
+          <Link href="/" className="text-black">
             LA NOTTÉ <span className="text-sm font-normal block text-center">NAIL STUDIO</span>
           </Link>
         </div>

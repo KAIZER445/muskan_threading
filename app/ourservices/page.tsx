@@ -1,8 +1,9 @@
+// app/services/page.tsx
 import Head from 'next/head';
 import Layoutservice from '../ourservices_layouts/Layoutservice';
 import Layoutservicetwo from '../ourservices_layouts/Layoutservicetwo';
 
-// Define the data structure for the API response
+// Define the expected data structure for components
 interface HeroData {
   title: string;
   description: string;
@@ -13,7 +14,7 @@ interface HeroData {
 interface Service {
   title: string;
   description: string;
-  image: string;
+  image: string | null; // Allow null for image
   link: string;
 }
 
@@ -22,9 +23,62 @@ interface ServicesPageData {
   services: Service[];
 }
 
+// Define the API response structure
+interface ApiResponse {
+  status: string;
+  data: {
+    hero: {
+      layoutservice_hero_title: string;
+      layoutservice_hero_description: string;
+      layoutservice_hero_buttonText: string;
+      layoutservice_hero_buttonLink: string;
+    };
+    services: {
+      [key: string]: string | null; // Generic type for dynamic keys like layoutservicetwo_service_0_title
+    };
+  };
+}
+
+// Transform API data to match component expectations
+function transformApiData(apiData: ApiResponse['data']): ServicesPageData {
+  // Transform hero data
+  const hero: HeroData = {
+    title: apiData.hero.layoutservice_hero_title,
+    description: apiData.hero.layoutservice_hero_description,
+    buttonText: apiData.hero.layoutservice_hero_buttonText,
+    buttonLink: apiData.hero.layoutservice_hero_buttonLink,
+  };
+
+  // Transform services data
+  const services: Service[] = [];
+  const serviceKeys = Object.keys(apiData.services).filter((key) =>
+    key.startsWith('layoutservicetwo_service_')
+  );
+
+  // Group keys by service index (e.g., 0, 1, 2)
+  const serviceIndices = [...new Set(
+    serviceKeys.map((key) => key.match(/layoutservicetwo_service_(\d+)/)?.[1])
+  )].filter((index): index is string => index !== undefined);
+
+  // Transform each service into a Service object
+  serviceIndices.forEach((index) => {
+    services.push({
+      title: apiData.services[`layoutservicetwo_service_${index}_title`] as string,
+      description: apiData.services[`layoutservicetwo_service_${index}_description`] as string,
+      image: apiData.services[`layoutservicetwo_service_${index}_image`] as string | null,
+      link: apiData.services[`layoutservicetwo_service_${index}_link`] as string,
+    });
+  });
+
+  return {
+    hero,
+    services,
+  };
+}
+
 // Fetch data from the API
 async function fetchServicesData(): Promise<ServicesPageData> {
-  const res = await fetch('https://backend.muskanthreading.com/api/homepage', {
+  const res = await fetch('https://backend.muskanthreading.com/api/servicepage', {
     next: { revalidate: 3600 }, // Revalidate every hour
   });
 
@@ -32,8 +86,9 @@ async function fetchServicesData(): Promise<ServicesPageData> {
     throw new Error('Failed to fetch services page data');
   }
 
-  const data: ServicesPageData = await res.json();
-  return data;
+  const apiData: ApiResponse = await res.json();
+  console.log('API Response:', apiData); // Log for debugging
+  return transformApiData(apiData.data); // Transform the nested 'data' object
 }
 
 export default async function ServicesPage() {
