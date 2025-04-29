@@ -1,15 +1,13 @@
-// app/about/page.tsx
-import Head from 'next/head';
 import Layoutsone from '../about_layouts/Layoutsone';
 import Layoutstwo from '../about_layouts/Layoutstwo';
 import Layoutsthree from '../about_layouts/Layoutsthree';
 
-// Define the data structure for the API response
+// Define the data structure for the components
 interface LayoutOneData {
   title: string;
   subtitle: string;
   description: string;
-  image: string | null; // Allow null for image
+  image: string | null;
 }
 
 interface TimelineItem {
@@ -24,44 +22,53 @@ interface LayoutTwoData {
 
 interface Feature {
   name: string;
-  icon?: string; // Make icon optional since API doesn't provide it
+  icon?: string;
 }
 
 interface LayoutThreeData {
   title: string;
   description: string;
-  features: Feature[]; // Array of features
-  image1: string | null; // Allow null for images
+  features: Feature[];
+  image1: string | null;
   image2: string | null;
-  towel_icon?: string; // Make towel_icon optional
+  towel_icon?: string;
 }
 
-// API response structure
+interface AboutPageData {
+  layoutOne: LayoutOneData;
+  layoutTwo: LayoutTwoData;
+  layoutThree: LayoutThreeData;
+}
+
+// Define the API response structure
 interface ApiResponse {
-  layout_one: {
-    layout_one_about_title: string;
-    layout_one_about_subtitle: string;
-    layout_one_about_description: string;
-    layout_one_about_main_image: string | null;
-  };
-  layout_three: {
-    layout_three_about_title: string;
-    layout_three_about_description: string;
-    layout_three_about_features_1: string;
-    layout_three_about_features_2: string;
-    layout_three_about_features_3: string;
-    layout_three_about_features_4: string;
-    layout_three_about_features_5: string;
-    layout_three_about_features_6: string;
-    layout_three_about_features_7: string;
-    layout_three_about_features_8: string;
-    layout_three_about_image1: string | null;
-    layout_three_about_image2: string | null;
+  status: string;
+  data: {
+    layout_one: {
+      layout_one_about_title: string;
+      layout_one_about_subtitle: string;
+      layout_one_about_description: string;
+      layout_one_about_main_image: string | null;
+    };
+    layout_three: {
+      layout_three_about_title: string;
+      layout_three_about_description: string;
+      layout_three_about_features_1: string;
+      layout_three_about_features_2: string;
+      layout_three_about_features_3: string;
+      layout_three_about_features_4: string;
+      layout_three_about_features_5: string;
+      layout_three_about_features_6: string;
+      layout_three_about_features_7: string;
+      layout_three_about_features_8: string;
+      layout_three_about_image1: string | null;
+      layout_three_about_image2: string | null;
+    };
   };
 }
 
 // Transform API data to match component expectations
-function transformApiData(apiData: ApiResponse): AboutPageData {
+function transformApiData(apiData: ApiResponse['data']): AboutPageData {
   return {
     layoutOne: {
       title: apiData.layout_one.layout_one_about_title,
@@ -70,7 +77,31 @@ function transformApiData(apiData: ApiResponse): AboutPageData {
       image: apiData.layout_one.layout_one_about_main_image,
     },
     layoutTwo: {
-      timeline: [], // Provide a default empty timeline since API doesn't include layout_two
+      // Temporary hardcoded timeline until API provides this data
+      timeline: [
+        {
+          year: '2010',
+          title: 'Founded Muskan Threading',
+          description: 'Started our journey in beauty services.',
+        },
+        {
+          year: '2015',
+          title: 'Expanded Services',
+          description: 'Added new threading and care services.',
+        },
+        {
+          year: '2020',
+          title: 'Opened New Location',
+          description: 'Expanded to a second location to serve more clients.',
+        },
+        {
+          year: '2023',
+          title: 'Celebrated 100K Clients',
+          description: 'Reached a milestone of serving 100,000 happy clients.',
+        },
+      ],
+      // TODO: Update API to provide layout_two.timeline and uncomment below
+      // timeline: apiData.layout_two?.timeline || [],
     },
     layoutThree: {
       title: apiData.layout_three.layout_three_about_title,
@@ -84,10 +115,10 @@ function transformApiData(apiData: ApiResponse): AboutPageData {
         { name: apiData.layout_three.layout_three_about_features_6 },
         { name: apiData.layout_three.layout_three_about_features_7 },
         { name: apiData.layout_three.layout_three_about_features_8 },
-      ],
+      ].filter((feature) => feature.name && typeof feature.name === 'string'),
       image1: apiData.layout_three.layout_three_about_image1,
       image2: apiData.layout_three.layout_three_about_image2,
-      towel_icon: '', // Provide a default or empty string since API doesn't include it
+      towel_icon: '', // Default to empty string as API doesn't provide it
     },
   };
 }
@@ -103,29 +134,51 @@ async function fetchAboutData(): Promise<AboutPageData> {
   }
 
   const apiData: ApiResponse = await res.json();
-  return transformApiData(apiData.data); // Transform the nested 'data' object
+  if (apiData.status !== 'success' || !apiData.data) {
+    throw new Error('Invalid API response structure');
+  }
+
+  return transformApiData(apiData.data);
 }
 
-export default async function AboutPage() {
-  const data = await fetchAboutData();
+// Define metadata for SEO
+export const metadata = {
+  title: 'About Us | Muskan Threading',
+  description: 'Learn more about Muskan Threading, our mission, and our dedication to enhancing natural beauty with expert threading and personalized care.',
+};
 
-  return (
-    <>
-      <Layoutsone
-        title={data.layoutOne.title}
-        subtitle={data.layoutOne.subtitle}
-        description={data.layoutOne.description}
-        image={data.layoutOne.image}
-      />
-      <Layoutstwo timeline={data.layoutTwo.timeline} />
-      <Layoutsthree
-        title={data.layoutThree.title}
-        description={data.layoutThree.description}
-        features={data.layoutThree.features}
-        image1={data.layoutThree.image1}
-        image2={data.layoutThree.image2}
-        towel_icon={data.layoutThree.towel_icon}
-      />
-    </>
-  );
+export default async function AboutPage() {
+  try {
+    const data = await fetchAboutData();
+
+    // Log the API response for debugging
+    console.log('About API Response:', data);
+
+    // Override metadata with dynamic data
+    metadata.title = `${data.layoutOne.title} | Muskan Threading`;
+    metadata.description = data.layoutOne.description;
+
+    return (
+      <div className="space-y-10">
+        <Layoutsone
+          title={data.layoutOne.title}
+          subtitle={data.layoutOne.subtitle}
+          description={data.layoutOne.description}
+          image={data.layoutOne.image}
+        />
+        <Layoutstwo timeline={data.layoutTwo.timeline} />
+        <Layoutsthree
+          title={data.layoutThree.title}
+          description={data.layoutThree.description}
+          features={data.layoutThree.features}
+          image1={data.layoutThree.image1}
+          image2={data.layoutThree.image2}
+          towel_icon={data.layoutThree.towel_icon}
+        />
+      </div>
+    );
+  } catch (error) {
+    console.error('Error fetching about page data:', error);
+    return <div>Error loading about page. Please try again later.</div>;
+  }
 }

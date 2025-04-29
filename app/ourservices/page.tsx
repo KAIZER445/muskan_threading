@@ -1,5 +1,3 @@
-// app/services/page.tsx
-import Head from 'next/head';
 import Layoutservice from '../ourservices_layouts/Layoutservice';
 import Layoutservicetwo from '../ourservices_layouts/Layoutservicetwo';
 
@@ -14,7 +12,7 @@ interface HeroData {
 interface Service {
   title: string;
   description: string;
-  image: string | null; // Allow null for image
+  image: string | null;
   link: string;
 }
 
@@ -34,7 +32,7 @@ interface ApiResponse {
       layoutservice_hero_buttonLink: string;
     };
     services: {
-      [key: string]: string | null; // Generic type for dynamic keys like layoutservicetwo_service_0_title
+      [key: string]: string | null;
     };
   };
 }
@@ -62,12 +60,22 @@ function transformApiData(apiData: ApiResponse['data']): ServicesPageData {
 
   // Transform each service into a Service object
   serviceIndices.forEach((index) => {
-    services.push({
-      title: apiData.services[`layoutservicetwo_service_${index}_title`] as string,
-      description: apiData.services[`layoutservicetwo_service_${index}_description`] as string,
-      image: apiData.services[`layoutservicetwo_service_${index}_image`] as string | null,
-      link: apiData.services[`layoutservicetwo_service_${index}_link`] as string,
-    });
+    const title = apiData.services[`layoutservicetwo_service_${index}_title`];
+    const description = apiData.services[`layoutservicetwo_service_${index}_description`];
+    const image = apiData.services[`layoutservicetwo_service_${index}_image`];
+    const link = apiData.services[`layoutservicetwo_service_${index}_link`];
+
+    // Validate required fields
+    if (typeof title === 'string' && typeof description === 'string' && typeof link === 'string') {
+      services.push({
+        title,
+        description,
+        image: typeof image === 'string' || image === null ? image : null,
+        link,
+      });
+    } else {
+      console.warn(`Skipping service ${index} due to invalid data`);
+    }
   });
 
   return {
@@ -87,15 +95,31 @@ async function fetchServicesData(): Promise<ServicesPageData> {
   }
 
   const apiData: ApiResponse = await res.json();
-  console.log('API Response:', apiData); // Log for debugging
-  return transformApiData(apiData.data); // Transform the nested 'data' object
+  if (apiData.status !== 'success' || !apiData.data) {
+    throw new Error('Invalid API response structure');
+  }
+
+  return transformApiData(apiData.data);
 }
 
-export default async function ServicesPage() {
-  const data = await fetchServicesData();
+// Define metadata for SEO
+export const metadata = {
+  title: 'Services | Muskan Threading',
+  description: 'Explore our range of threading and beauty services at Muskan Threading.',
+};
 
-  return (
-    <>
+export default async function ServicesPage() {
+  try {
+    const data = await fetchServicesData();
+
+    // Log the API response for debugging
+    console.log('Services API Response:', data);
+
+    // Override metadata with dynamic data
+    metadata.title = `${data.hero.title} | Muskan Threading Services`;
+    metadata.description = data.hero.description;
+
+    return (
       <div>
         <Layoutservice
           title={data.hero.title}
@@ -105,6 +129,9 @@ export default async function ServicesPage() {
         />
         <Layoutservicetwo services={data.services} />
       </div>
-    </>
-  );
+    );
+  } catch (error) {
+    console.error('Error fetching services page data:', error);
+    return <div>Error loading services. Please try again later.</div>;
+  }
 }

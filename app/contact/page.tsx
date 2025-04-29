@@ -1,7 +1,12 @@
-// app/contact/page.tsx
 import Head from 'next/head';
 import Contactlayone from '../contact_layouts/Contactlayone';
-import Contactlaythree from '../contact_layouts/Contactlaythree';
+import dynamic from 'next/dynamic';
+
+// Lazy-load Contactlaythree without ssr: false
+const Contactlaythree = dynamic(() => import('../contact_layouts/Contactlaythree'), {
+  // Removed ssr: false, as Contactlaythree is already a client component
+  loading: () => <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">Loading Contact Form...</div>,
+});
 
 // Define the expected data structure for components
 interface OpeningHour {
@@ -20,7 +25,7 @@ interface HeroData {
 interface ContactInfo {
   label: string;
   value: string;
-  iconType: 'phone' | 'chat';
+  iconType: 'phone' | 'chat' | 'email' | 'address';
 }
 
 interface FooterData {
@@ -31,7 +36,7 @@ interface FooterData {
   infoSubheading: string;
   infoDescription: string;
   contactInfo: ContactInfo[];
-  images: (string | null)[];
+  images: string[];
 }
 
 interface ContactPageData {
@@ -39,24 +44,24 @@ interface ContactPageData {
   footer: FooterData;
 }
 
-// Define the API response structure
+// Define the API response structure with nullable fields for robustness
 interface ApiResponse {
   status: string;
   data: {
     contactlayone: {
-      contactlayone_title: string;
-      contactlayone_description: string;
-      contactlayone_services: string;
-      contactlayone_addressLines: string;
+      contactlayone_title: string | null;
+      contactlayone_description: string | null;
+      contactlayone_services: string | null;
+      contactlayone_addressLines: string | null;
     };
     contactlaytwo: {
-      contactlaytwo_formHeading: string;
-      contactlaytwo_formSubheading: string;
-      contactlaytwo_formButtonText: string;
-      contactlaytwo_infoHeading: string;
-      contactlaytwo_infoSubheading: string;
-      contactlaytwo_infoDescription: string;
-      contactlaytwo_contactInfo: string;
+      contactlaytwo_formHeading: string | null;
+      contactlaytwo_formSubheading: string | null;
+      contactlaytwo_formButtonText: string | null;
+      contactlaytwo_infoHeading: string | null;
+      contactlaytwo_infoSubheading: string | null;
+      contactlaytwo_infoDescription: string | null;
+      contactlaytwo_contactInfo: string | null;
       contactlaytwo_images_1: string | null;
       contactlaytwo_images_2: string | null;
       contactlaytwo_images_3: string | null;
@@ -69,27 +74,29 @@ interface ApiResponse {
 
 // Transform API data to match component expectations
 function transformApiData(apiData: ApiResponse['data']): ContactPageData {
-  // Transform hero data
+  // Transform hero data with fallback values
   const hero: HeroData = {
-    title: apiData.contactlayone.contactlayone_title,
-    description: apiData.contactlayone.contactlayone_description,
+    title: apiData.contactlayone.contactlayone_title || 'Contact Us',
+    description: apiData.contactlayone.contactlayone_description || 'Get in touch with us!',
     services: apiData.contactlayone.contactlayone_services
-      .split(',')
-      .map((service) => service.trim()), // Split comma-separated string into array
+      ?.split(',')
+      .map((service) => service.trim())
+      .filter(Boolean) || [],
     addressLines: apiData.contactlayone.contactlayone_addressLines
-      .split('|')
-      .map((line) => line.trim()), // Split pipe-separated string into array
-    openingHours: [], // Provide default empty array since API doesn't include this
+      ?.split('|')
+      .map((line) => line.trim())
+      .filter(Boolean) || [],
+    openingHours: [], // TODO: Update when API provides opening hours
   };
 
-  // Transform footer data
+  // Transform footer data with fallback values
   const footer: FooterData = {
-    formHeading: apiData.contactlaytwo.contactlaytwo_formHeading,
-    formSubheading: apiData.contactlaytwo.contactlaytwo_formSubheading,
-    formButtonText: apiData.contactlaytwo.contactlaytwo_formButtonText,
-    infoHeading: apiData.contactlaytwo.contactlaytwo_infoHeading,
-    infoSubheading: apiData.contactlaytwo.contactlaytwo_infoSubheading,
-    infoDescription: apiData.contactlaytwo.contactlaytwo_infoDescription,
+    formHeading: apiData.contactlaytwo.contactlaytwo_formHeading || 'Send Us a Message',
+    formSubheading: apiData.contactlaytwo.contactlaytwo_formSubheading || 'We’d love to hear from you!',
+    formButtonText: apiData.contactlaytwo.contactlaytwo_formButtonText || 'Submit',
+    infoHeading: apiData.contactlaytwo.contactlaytwo_infoHeading || 'Our Info',
+    infoSubheading: apiData.contactlaytwo.contactlaytwo_infoSubheading || 'Contact Details',
+    infoDescription: apiData.contactlaytwo.contactlaytwo_infoDescription || '',
     contactInfo: [],
     images: [
       apiData.contactlaytwo.contactlaytwo_images_1,
@@ -98,86 +105,102 @@ function transformApiData(apiData: ApiResponse['data']): ContactPageData {
       apiData.contactlaytwo.contactlaytwo_images_4,
       apiData.contactlaytwo.contactlaytwo_images_5,
       apiData.contactlaytwo.contactlaytwo_images_6,
-    ],
+    ].filter((img): img is string => img !== null), // Remove null images
   };
 
   // Parse contactInfo string into an array of ContactInfo objects
   const contactInfoItems = apiData.contactlaytwo.contactlaytwo_contactInfo
-    .split('|')
-    .map((item) => item.trim());
-  footer.contactInfo = contactInfoItems.map((item) => {
-    let label = '';
-    let value = item;
-    let iconType: 'phone' | 'chat' = 'chat'; // Default to 'chat'
+    ?.split('|')
+    .map((item) => item.trim())
+    .filter(Boolean) || [];
 
-    // Infer label and iconType based on content
+  footer.contactInfo = contactInfoItems.map((item) => {
+    let label = 'Info';
+    let value = item;
+    let iconType: ContactInfo['iconType'] = 'chat';
+
+    // Improved parsing logic to match Contactlaythree icon types
     if (item.includes('Location #1') || item.includes('Location #2')) {
       label = 'Address';
-      iconType = 'chat'; // No specific icon for address, default to 'chat'
+      iconType = 'address';
     } else if (item.includes('Website')) {
       label = 'Website';
       value = item.split('Website: ')[1] || item;
       iconType = 'chat';
+    } else if (item.includes('@')) {
+      label = 'Email';
+      iconType = 'email';
     }
 
-    return {
-      label: label || 'Info', // Default label if none inferred
-      value,
-      iconType,
-    };
+    return { label, value, iconType };
   });
 
-  // Add phone numbers from infoDescription to contactInfo
-  const phoneMatches = apiData.contactlaytwo.contactlaytwo_infoDescription.match(/Ph: \([^)]+\)/g);
-  if (phoneMatches) {
-    phoneMatches.forEach((phone, index) => {
-      footer.contactInfo.push({
-        label: `Location #${index + 1} Phone`,
-        value: phone.replace('Ph: ', ''),
-        iconType: 'phone',
-      });
-    });
-  }
+  // Extract phone numbers from infoDescription
+  const phoneMatches = apiData.contactlaytwo.contactlaytwo_infoDescription?.match(/Ph: \([^)]+\)/g) || [];
+  footer.contactInfo.push(
+    ...phoneMatches.map((phone, index) => ({
+      label: `Location #${index + 1} Phone`,
+      value: phone.replace('Ph: ', ''),
+      iconType: 'phone' as const,
+    }))
+  );
 
-  // Add email from infoDescription to contactInfo
-  const emailMatch = apiData.contactlaytwo.contactlaytwo_infoDescription.match(/Email: [^\s|]+/);
-  if (emailMatch) {
+  // Extract email from infoDescription
+  const emailMatch = apiData.contactlaytwo.contactlaytwo_infoDescription?.match(/Email: [^\s|]+/) || [];
+  if (emailMatch[0]) {
     footer.contactInfo.push({
       label: 'Email',
       value: emailMatch[0].replace('Email: ', ''),
-      iconType: 'chat',
+      iconType: 'email' as const,
     });
   }
 
-  return {
-    hero,
-    footer,
-  };
+  return { hero, footer };
 }
 
 // Fetch data from the API
-async function fetchContactData(): Promise<ContactPageData> {
-  const res = await fetch('https://backend.muskanthreading.com/api/contactpage', {
-    next: { revalidate: 3600 }, // Revalidate every hour
-  });
+async function fetchContactData(): Promise<ApiResponse> {
+  try {
+    const res = await fetch('https://backend.muskanthreading.com/api/contactpage', {
+      next: { revalidate: 3600 }, // Revalidate every hour
+    });
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch contact page data');
+    if (!res.ok) {
+      throw new Error(`Failed to fetch contact page data: ${res.statusText}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error('Error fetching contact data:', error);
+    throw error; // Let Next.js handle the error
   }
-
-  const apiData: ApiResponse = await res.json();
-  console.log('API Response:', apiData); // Log for debugging
-  return transformApiData(apiData.data);
 }
 
+// Component with error boundary
 export default async function ContactPage() {
-  const data = await fetchContactData();
+  let data: ContactPageData;
+
+  try {
+    const apiResponse = await fetchContactData();
+    data = transformApiData(apiResponse.data);
+  } catch (error) {
+    // Fallback UI for errors
+    return (
+      <div className="error-container min-h-screen flex items-center justify-center">
+        <h1 className="text-3xl font-bold text-red-600">Oops! Something went wrong.</h1>
+        <p className="text-gray-600 mt-2">We couldn’t load the contact page. Please try again later.</p>
+      </div>
+    );
+  }
 
   return (
     <>
       <Head>
         <title>Contact Us - Muskan Threading</title>
         <meta name="description" content={data.hero.description} />
+        <meta property="og:title" content="Contact Us - Muskan Threading" />
+        <meta property="og:description" content={data.hero.description} />
+        <meta property="og:type" content="website" />
       </Head>
       <div>
         <Contactlayone

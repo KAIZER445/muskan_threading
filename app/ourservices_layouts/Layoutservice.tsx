@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 
 interface LayoutServiceProps {
@@ -8,24 +7,25 @@ interface LayoutServiceProps {
   buttonLink: string;
 }
 
-const Layoutservice: React.FC<LayoutServiceProps> = ({ title, description, buttonText, buttonLink }) => {
+export default function Layoutservice({ title, description, buttonText, buttonLink }: LayoutServiceProps) {
   return (
-    <div className="container px-2 lg:px-30 mx-auto">
-      <div className="various py-7">
+    <section className="container px-2 lg:px-[30px] mx-auto">
+      <div className="py-7">
         <div className="text-center text-3xl font-black py-2 pb-4">
           <h1>{title}</h1>
         </div>
         <p className="text-center py-2">{description}</p>
         <div className="flex justify-center py-4">
           <Link href={buttonLink}>
-            <button className="bg-[#b5a580] text-white px-3 py-2 tracking-widest rounded-lg cursor-pointer">
+            <button
+              className="bg-[#b5a580] text-white px-3 py-2 tracking-widest rounded-lg hover:bg-[#a09470] transition-colors duration-300"
+              aria-label={`Navigate to ${buttonText}`}
+            >
               {buttonText}
             </button>
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Layoutservice;
+}

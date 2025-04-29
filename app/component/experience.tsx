@@ -33,8 +33,8 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           <div
             className="absolute w-full h-full rounded-lg"
             style={{
-              backgroundImage: `url(${services.services_clay_masks_image || '/makeup.jpg'})`,
-              backgroundSize: 'cover',
+              backgroundImage: `url(${services?.services_clay_masks_image ? `https://backend.muskanthreading.com/public/storage/${services.services_clay_masks_image}` : '/makeup.jpg'})`,
+              backgroundSize: 'cover'
             }}
           ></div>
           <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
@@ -53,9 +53,9 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           <div
             className="absolute w-full h-full rounded-lg"
             style={{
-              backgroundImage: `url(${services.services_wellness_spa_image || '/womenbg.png'})`,
+                            backgroundImage: `url(${services?.services_wellness_spa_image ? `https://backend.muskanthreading.com/public/storage/${services.services_clay_masks_image}` : '/makeup.jpg'})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'left',
+              backgroundPosition: 'left'
             }}
           ></div>
           <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
