@@ -1,5 +1,4 @@
-import Head from 'next/head';
-import { Suspense } from 'react';
+import { Suspense } from 'react'; // Add this import
 import Teamlayoutone from '../teamlayouts/Teamlayoutone';
 import Teamlayouttwo from '../teamlayouts/Teamlayouttwo';
 import Teamlayoutthree from '../teamlayouts/Teamlayoutthree';
@@ -20,21 +19,21 @@ interface SocialLinks {
 }
 
 interface TeamMember {
-  id: string;
+  id?: string; // Optional, using index as fallback
   name: string;
   role: string;
-  image: string | null; // Allow null for image
+  image: string | null;
   socialLinks: SocialLinks;
 }
 
 interface Counter {
-  value: number;
+  value: string;
   label: string;
   suffix: string;
 }
 
 interface CtaData {
-  backgroundImage: string | null; // Allow null for images
+  backgroundImage: string | null;
   overlayImage: string | null;
   counters: Counter[];
 }
@@ -57,12 +56,12 @@ interface ApiResponse {
       teamlayone_buttonLink: string;
     };
     teamMembers: {
-      [key: string]: string | null; // For dynamic keys like teamMember_1.id
+      [key: string]: string | null;
     };
     cta: {
       cta_backgroundImage: string | null;
       cta_overlayImage: string | null;
-      [key: string]: string | null; // For dynamic keys like cta_counters[1].value
+      [key: string]: string | null;
     };
   };
 }
@@ -79,11 +78,10 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
     description: apiData.teamlayone.teamlayone_description || '',
     subtitle: apiData.teamlayone.teamlayone_subheading || '',
     ctaText: apiData.teamlayone.teamlayone_buttonText || 'Learn More',
-    ctaLink: apiData.teamlayone.teamlayone_buttonLink || '#',
+    ctaLink: '/contact', // Adjusted from /team
   };
 
   // Transform team members
-  const teamMembers: TeamMember[] = [];
   const teamMemberKeys = Object.keys(apiData.teamMembers).filter((key) =>
     key.startsWith('teamMember_')
   );
@@ -91,52 +89,38 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
     teamMemberKeys.map((key) => key.match(/teamMember_(\d+)/)?.[1])
   )].filter((index): index is string => index !== undefined);
 
-  teamMembers.push(
-    ...teamMemberIndices.map((index) => {
-      const id = apiData.teamMembers[`teamMember_${index}.id`];
-      const name = apiData.teamMembers[`teamMember_${index}.name`];
-      const role = apiData.teamMembers[`teamMember_${index}.role`];
-      const image = apiData.teamMembers[`teamMember_${index}_image`];
+  // Step 1: Map to an array that may contain null
+  const mappedMembers: (TeamMember | null)[] = teamMemberIndices.map((index) => {
+    const name = apiData.teamMembers[`teamMember_${index}.name`];
+    const role = apiData.teamMembers[`teamMember_${index}.role`];
 
-      // Validate team member data
-      if (typeof id !== 'string' || !id || typeof name !== 'string' || !name || typeof role !== 'string' || !role) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.warn(`Skipping invalid team member at index ${index}:`, { id, name, role });
-        }
-        return null;
-      }
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`Processing team member ${index}:`, { name, role });
+    }
 
-      // Validate image
-      if (image && typeof image !== 'string') {
-        if (process.env.NODE_ENV !== 'production') {
-          console.warn(`Invalid image for team member ${name}:`, image);
-        }
-      }
-
-      // Log image path and URL for debugging
+    if (typeof name !== 'string' || !name.trim() || typeof role !== 'string' || !role.trim()) {
       if (process.env.NODE_ENV !== 'production') {
-        console.log(`Team member ${name} image path:`, image);
-        if (image && typeof image === 'string') {
-          console.log(
-            `Constructed image URL: ${
-              process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com'
-            }/public/storage/${image}`
-          );
-        }
+        console.warn(`Skipping invalid team member at index ${index}:`, { name, role });
       }
+      return null;
+    }
 
-      return {
-        id,
-        name,
-        role,
-        image: typeof image === 'string' && image.trim() ? image : null,
-        socialLinks: {
-          facebookLink: '',
-          twitterLink: '',
-          instagramLink: '',
-        },
-      };
-    }).filter((member): member is TeamMember => member !== null)
+    return {
+      id: index,
+      name: name.trim(),
+      role: role.trim(),
+      image: null, // API doesn't provide images
+      socialLinks: {
+        facebookLink: '',
+        twitterLink: '',
+        instagramLink: '',
+      },
+    };
+  });
+
+  // Step 2: Filter out null values to get TeamMember[]
+  const teamMembers: TeamMember[] = mappedMembers.filter(
+    (member): member is TeamMember => member !== null
   );
 
   // Transform CTA data
@@ -146,7 +130,6 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
     counters: [],
   };
 
-  // Extract counters
   const counterKeys = Object.keys(apiData.cta).filter((key) =>
     key.startsWith('cta_counters[')
   );
@@ -155,26 +138,25 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
   )].filter((index): index is string => index !== undefined);
 
   cta.counters = counterIndices.map((index) => {
-    const valueString = apiData.cta[`cta_counters[${index}].value`];
-    const label = apiData.cta[`cta_counters[${index}].label`];
-    const suffix = apiData.cta[`cta_counters[${index}].suffix`];
+    const value = apiData.cta[`cta_counters[${index}].value`] || '0';
+    const label = apiData.cta[`cta_counters[${index}].label`] || '';
+    const suffix = apiData.cta[`cta_counters[${index}].suffix`] || '';
 
-    // Validate counter data
-    if (typeof valueString !== 'string' || typeof label !== 'string' || typeof suffix !== 'string') {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`Processing counter ${index}:`, { value, label, suffix });
+    }
+
+    if (typeof value !== 'string' || typeof label !== 'string') {
       if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Skipping invalid counter at index ${index}:`, { valueString, label, suffix });
+        console.warn(`Skipping invalid counter at index ${index}:`, { value, label, suffix });
       }
       return null;
     }
 
-    // Parse value string (e.g., "5000+" -> 5000)
-    const valueMatch = valueString.match(/(\d+)/);
-    const value = valueMatch ? parseInt(valueMatch[1]) : 0;
-
     return {
-      value,
-      label,
-      suffix,
+      value: value.trim(),
+      label: label.trim(),
+      suffix: suffix.trim(),
     };
   }).filter((counter): counter is Counter => counter !== null);
 
@@ -189,7 +171,7 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
 async function fetchTeamsData(): Promise<TeamsPageData> {
   try {
     const res = await fetch('https://backend.muskanthreading.com/api/teampage', {
-      next: { revalidate: 3600 }, // Revalidate every hour
+      next: { revalidate: 0 },
     });
 
     if (!res.ok) {
@@ -208,42 +190,44 @@ async function fetchTeamsData(): Promise<TeamsPageData> {
   }
 }
 
+// Define metadata for SEO
+export const metadata = {
+  title: 'Our Team - Muskan Threading',
+  description: 'Meet the expert team at Muskan Threading, dedicated to providing exceptional beauty services.',
+  openGraph: {
+    title: 'Our Team - Muskan Threading',
+    description: 'Meet the expert team at Muskan Threading, dedicated to providing exceptional beauty services.',
+    type: 'website',
+  },
+};
+
+// Force dynamic rendering to handle revalidate: 0
+export const dynamic = 'force-dynamic';
+
 export default async function TeamsPage() {
   try {
     const data = await fetchTeamsData();
 
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Transformed Teams Data:', JSON.stringify(data, null, 2));
+    }
+
     return (
-      <>
-        <Head>
-          <title>Our Team - Muskan Threading</title>
-          <meta name="description" content={data.hero.description} />
-          <meta property="og:title" content="Our Team - Muskan Threading" />
-          <meta property="og:description" content={data.hero.description} />
-          <meta property="og:type" content="website" />
-          <meta name="twitter:card" content="summary_large_image" />
-        </Head>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div>
-            <Teamlayoutone {...data.hero} />
-            <Teamlayouttwo teamMembers={data.teamMembers} />
-            <Teamlayoutthree {...data.cta} />
-          </div>
-        </Suspense>
-      </>
+      <Suspense fallback={<div className="container mx-auto px-4 py-8 text-center">Loading...</div>}>
+        <div>
+          <Teamlayoutone {...data.hero} />
+          <Teamlayouttwo teamMembers={data.teamMembers} />
+          <Teamlayoutthree {...data.cta} />
+        </div>
+      </Suspense>
     );
   } catch (error) {
     console.error('TeamsPage error:', error);
     return (
-      <>
-        <Head>
-          <title>Error - Muskan Threading</title>
-          <meta name="description" content="An error occurred while loading the team page." />
-        </Head>
-        <div className="container mx-auto px-4 py-8 text-center">
-          <h1 className="text-2xl font-bold text-red-600">Error</h1>
-          <p className="mt-4 text-gray-600">Failed to load team data. Please try again later.</p>
-        </div>
-      </>
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-2xl font-bold text-red-600">Error</h1>
+        <p className="mt-4 text-gray-600">Failed to load team data. Please try again later.</p>
+      </div>
     );
   }
 }

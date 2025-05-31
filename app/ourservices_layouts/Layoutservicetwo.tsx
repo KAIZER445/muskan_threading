@@ -1,5 +1,6 @@
+'use client';
+
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface Service {
   title: string;
@@ -15,59 +16,58 @@ interface LayoutServiceTwoProps {
 export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
 
-  // Helper function to construct image URL
+  // Helper function to construct and validate image URL
   const getImageUrl = (image: string | null): string => {
     if (!image || typeof image !== 'string' || image.trim() === '') {
       if (process.env.NODE_ENV !== 'production') {
         console.warn(`Invalid or missing service image: ${image}`);
       }
-      return '/default-service.jpg'; // Updated to a more specific fallback
+      return ''; // Return empty string if no image
     }
-    const url = `${backendUrl}/public/storage/${image}`;
+
+    // Ensure the image path doesn't already contain the backend URL
+    const cleanImagePath = image.startsWith('http')
+      ? image // If it's already a full URL, use it as-is
+      : `${backendUrl}/public/storage/${image}`; // Construct the full URL
+
     if (process.env.NODE_ENV !== 'production') {
-      console.log(`Constructed service image URL: ${url}`);
+      console.log(`Constructed service image URL: ${cleanImagePath}`);
     }
-    return url;
+    return cleanImagePath;
   };
 
   return (
-    <section className="container mx-auto px-2 lg:px-[30px]">
-      {services.map((service, index) => (
-        <div key={index} className="flex flex-col md:flex-row gap-4 py-10">
-          <div className="w-full md:w-1/2">
-            <div className="flex justify-center">
-              <Image
-                src={getImageUrl(service.image)}
-                alt={service.title ? `${service.title} service image` : 'Default service image'}
-                width={500}
-                height={400}
-                className="w-full max-w-md h-[400px] object-cover rounded"
-                placeholder="blur"
-                blurDataURL="/default-service.jpg"
-              />
+    <section className="container mx-auto px-5 lg:px-[50px] py-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service, index) => (
+          <div key={index} className="flex  gap-4">
+            <div className="relative w-full h-64"> {/* Fixed aspect ratio container */}
+              {getImageUrl(service.image) ? (
+                <Image
+                  src={getImageUrl(service.image)}
+                  alt={service.title ? `${service.title} service image` : 'Default service image'}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover rounded-lg"
+                  onError={(e) => {
+                    if (process.env.NODE_ENV !== 'production') {
+                      console.error(`Failed to load image for ${service.title}: ${getImageUrl(service.image)}`);
+                    }
+                    e.currentTarget.style.display = 'none'; // Hide image on error
+                  }}
+                />
+              ) : null}
             </div>
-          </div>
-          <div className="w-full md:w-1/2">
-            <div>
-              <h1 className="text-3xl font-black">
+            <div className="mt-2">
+              <h1 className="text-xl font-black">
                 {String(index + 1).padStart(2, '0')}/
               </h1>
-              <h2 className="text-2xl font-black py-3">{service.title}</h2>
-              <p className="text-base text-justify py-1">{service.description}</p>
-            </div>
-            <div className="py-4">
-              <Link href={service.link}>
-                <button
-                  className="bg-[#b5a580] text-white px-3 py-2 tracking-widest rounded-lg hover:bg-[#a09470] transition-colors duration-300"
-                  aria-label={`Read more about ${service.title}`}
-                >
-                  Read More
-                </button>
-              </Link>
+              <h2 className="text-xl font-black py-2">{service.title}</h2>
+              <p className="text-sm text-justify py-1">{service.description}</p>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 }

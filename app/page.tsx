@@ -1,4 +1,3 @@
-// app/page.tsx
 import Head from 'next/head';
 import Hero from './component/hero';
 import SpaExperience from './component/experience';
@@ -65,7 +64,7 @@ export default async function Page() {
       return <div className="container mx-auto px-4 py-8 text-center">No content found.</div>;
     }
   } catch (error) {
-    console.error('Error fetching data:', error.message);
+    console.error('Error fetching data:', (error as Error).message);
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <p className="text-red-600">Error loading content. Please try again later.</p>
@@ -73,22 +72,52 @@ export default async function Page() {
     );
   }
 
-  const { hero = {}, main = {}, services = {}, testimonials = {}, features = {} } = homeData;
+  // Destructure with default values that match the interface
+  const {
+    hero = { hero_title: '', hero_button_text: '' },
+    main = { main_title: '', main_description: '' },
+    services = {
+      services_clay_masks_title: '',
+      services_clay_masks_description: '',
+      services_wellness_spa_title: '',
+      services_wellness_spa_description: '',
+    },
+    testimonials = {
+      testimonials_title: '',
+      testimonials_button_text: '',
+      testimonials_1_description: '',
+      testimonials_1_rating: '',
+      testimonials_1_name: '',
+      testimonials_2_description: '',
+      testimonials_2_rating: '',
+      testimonials_2_name: '',
+    },
+    features = {
+      features_nail_care_title: '',
+      features_nail_care_description: '',
+      features_nail_art_title: '',
+      features_nail_art_description: '',
+      features_add_ons_title: '',
+      features_add_ons_description: '',
+      features_treatments_title: '',
+      features_treatments_description: '',
+    },
+  } = homeData;
 
   return (
     <>
       <Head>
-        <title>{hero?.hero_title || 'Muskan Threading'}</title>
-        <meta name="description" content={main?.main_description || 'Welcome to Muskan Threading'} />
+        <title>{hero.hero_title || 'Muskan Threading'}</title>
+        <meta name="description" content={main.main_description || 'Welcome to Muskan Threading'} />
       </Head>
 
       <Hero hero={hero} />
       <div className="container mx-auto px-4">
-        <div  className="mb-16">
-        <SpaExperience main={main} services={services} />
+        <div className="mb-16">
+          <SpaExperience main={main} services={services} />
         </div>
-        <div  className="mb-16">
-        <Testimonials testimonials={testimonials} />
+        <div className="mb-16">
+          <Testimonials testimonials={testimonials} />
         </div>
         <Features features={features} />
       </div>

@@ -4,23 +4,32 @@ interface LayoutOneProps {
   title: string;
   subtitle: string;
   description: string;
-  image: string | null; // Updated to allow null
+  image: string | null;
 }
 
 export default function Layoutsone({ title, subtitle, description, image }: LayoutOneProps) {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
+  console.log('Layoutsone Backend URL:', backendUrl);
+
+  // Log incoming props for debugging
+  console.log('Layoutsone Props:', { title, subtitle, description, image });
 
   // Helper function to construct image URL
   const getImageUrl = (image: string | null): string => {
+    const defaultImage = '/default-about-hero.jpg';
     if (!image || typeof image !== 'string' || image.trim() === '') {
       if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Invalid or missing about image: ${image}`);
+        console.warn(`Invalid or missing about image: ${image}. Using fallback: ${defaultImage}`);
       }
-      return '/default-about-hero.jpg';
+      return defaultImage;
     }
     const url = `${backendUrl}/public/storage/${image}`;
     if (process.env.NODE_ENV !== 'production') {
       console.log(`Constructed about image URL: ${url}`);
+      // Verify image URL accessibility
+      fetch(url, { method: 'HEAD' })
+        .then((res) => console.log(`Image URL ${url} is ${res.ok ? 'accessible' : 'inaccessible'} (Status: ${res.status})`))
+        .catch((err) => console.error(`Error accessing image URL ${url}:`, err));
     }
     return url;
   };
@@ -49,9 +58,9 @@ export default function Layoutsone({ title, subtitle, description, image }: Layo
           </div>
         </div>
         <div className="py-5">
-          <h1 className="text-3xl font-bold">{title}</h1>
-          <h2 className="text-xl text-gray-600 py-2">{subtitle}</h2>
-          <p className="py-5">{description}</p>
+          <h1 className="text-3xl font-bold">{title || 'About Us'}</h1>
+          <h2 className="text-xl text-gray-600 py-2">{subtitle || 'Our Mission'}</h2>
+          <p className="py-5">{description || 'No description available.'}</p>
         </div>
       </div>
 
@@ -59,7 +68,7 @@ export default function Layoutsone({ title, subtitle, description, image }: Layo
       <div className="w-full md:w-1/2 p-4">
         <Image
           src={getImageUrl(image)}
-          alt={`${title} - About Muskan Threading`}
+          alt={`${title || 'About'} - Muskan Threading`}
           width={600}
           height={400}
           className="rounded-xl shadow-md object-cover w-full h-[400px]"

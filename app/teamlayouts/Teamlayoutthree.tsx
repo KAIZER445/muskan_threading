@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 // Counter props type
 type CounterProps = {
-  value: number;
+  value: string; // Changed to string to match API data (e.g., "5000+")
   label: string;
   suffix: string;
 };
@@ -13,10 +13,11 @@ type CounterProps = {
 // Counter component
 const Counter = ({ value, label, suffix }: CounterProps) => {
   const [count, setCount] = useState<number>(0);
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10) || 0; // Extract numeric part
 
   useEffect(() => {
     let start = 0;
-    const end = value;
+    const end = numericValue;
     if (start === end) return;
 
     const duration = 1500; // Animation duration in ms
@@ -32,13 +33,13 @@ const Counter = ({ value, label, suffix }: CounterProps) => {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [value]);
+  }, [numericValue]);
 
   return (
     <div className="flex flex-col items-center" aria-live="polite">
       <h2 className="text-3xl font-bold text-gray-800">
         {count}
-        {suffix}
+        {value.replace(/[0-9]/g, '') || suffix} {/* Display original suffix or provided suffix */}
       </h2>
       <p className="mt-2 text-gray-600">{label}</p>
     </div>
@@ -61,12 +62,12 @@ export default function Teamlayoutthree({
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
 
   // Helper function to construct image URL
-  const getImageUrl = (image: string | null, type: 'background' | 'overlay'): string => {
+  const getImageUrl = (image: string | null, type: 'background' | 'overlay'): string | null => {
     if (!image || typeof image !== 'string' || image.trim() === '') {
       if (process.env.NODE_ENV !== 'production') {
         console.warn(`Invalid or missing ${type} image: ${image}`);
       }
-      return type === 'background' ? '/default-background.jpg' : '/default-overlay.jpg';
+      return null; // Return null instead of default image
     }
     const url = `${backendUrl}/public/storage/${image}`;
     if (process.env.NODE_ENV !== 'production') {
@@ -75,31 +76,44 @@ export default function Teamlayoutthree({
     return url;
   };
 
+  const backgroundUrl = getImageUrl(backgroundImage, 'background');
+  const overlayUrl = getImageUrl(overlayImage, 'overlay');
+
   return (
-    <div className="container mx-auto lg:pt-20 pt-8 relative">
-      <div className="relative w-full overflow-hidden h-[30rem] md:h-[40rem] lg:h-[50rem]">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={getImageUrl(backgroundImage, 'background')}
-            alt="Team section background"
-            fill
-            className="object-cover z-0"
-            placeholder="blur"
-            blurDataURL="/default-background.jpg"
-          />
+    <div className="container mx-auto lg:pt-20 pt-8 relative ">
+      <div className="relative w-full overflow-hidden" style={{ height: `${Math.max(30, counters.length * 10)}rem` }}>
+        {/* Background Image or Placeholder */}
+        <div className="absolute inset-0 z-0">
+          {backgroundUrl ? (
+            <Image
+              src={backgroundUrl}
+              alt="Team section background"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-2xl text-gray-500">No Background Image</span>
+            </div>
+          )}
         </div>
 
-        {/* Overlay Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={getImageUrl(overlayImage, 'overlay')}
-            alt="Decorative overlay texture"
-            fill
-            className="object-cover opacity-80 z-10"
-            placeholder="blur"
-            blurDataURL="/default-overlay.jpg"
-          />
+        {/* Overlay Image or Placeholder */}
+        <div className="absolute inset-0 z-10">
+          {overlayUrl ? (
+            <Image
+              src={overlayUrl}
+              alt="Decorative overlay texture"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover opacity-80"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-300 opacity-50 flex items-center justify-center">
+              <span className="text-2xl text-gray-600">No Overlay Image</span>
+            </div>
+          )}
         </div>
 
         {/* Counter Section */}
@@ -109,7 +123,7 @@ export default function Teamlayoutthree({
               <div key={index} className="flex items-center justify-center space-x-6 py-4">
                 <Counter {...counter} />
                 {index !== counters.length - 1 && (
-                  <div className="hidden md:block h-12 w-px bg-gray-400" />
+                  <div className="hidden " />
                 )}
               </div>
             ))}

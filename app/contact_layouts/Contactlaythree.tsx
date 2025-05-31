@@ -223,7 +223,6 @@ const Contactlaythree: React.FC<ContactLayThreeProps> = ({
         <div className="w-full md:w-1/2 p-8 lg:pt-15">
           <h3 className="text-sm uppercase text-red-600 font-semibold mb-2 py-3">{infoHeading}</h3>
           <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight py-2">{infoSubheading}</h1>
-          <p className="text-gray-600 mb-6">{infoDescription}</p>
           <div className="flex flex-col md:flex-row gap-8 md:gap-11 items-center">
             {contactInfo.map((info, index) => (
               <React.Fragment key={index}>

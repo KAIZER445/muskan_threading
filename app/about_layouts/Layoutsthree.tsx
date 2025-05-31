@@ -97,7 +97,7 @@ export default function Layoutsthree({
 
       {/* Right side - text and features */}
       <div className="w-full md:w-1/2">
-        <div className="p-4">
+        <div className="md:p-0 p-4">
           <div
             className="inline-block border rounded-xl px-3"
             role="img"

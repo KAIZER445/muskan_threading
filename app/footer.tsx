@@ -1,11 +1,10 @@
-// app/components/Footer.tsx
 import React from 'react';
 
 interface FooterData {
   logo_url?: string;
   logo_alt?: string;
   description?: string;
-  useful_links?: { name: string; url: string }[];
+  useful_links: { name: string; url: string }[]; // Removed ? to make it required
   contact_phone?: string;
   contact_fax?: string;
   contact_email?: string;
@@ -14,7 +13,7 @@ interface FooterData {
   powered_by_url?: string;
 }
 
-const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
+const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
   const currentYear = new Date().getFullYear();
 
   const defaultFooterData: FooterData = {
@@ -22,11 +21,10 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
     logo_alt: 'HairCutter logo',
     description: 'Etiam semper nibh orci, ac tincidunt mi consectetur a. In quis tortor ex. Morbi cursus sed neque quis dictum.',
     useful_links: [
-      { name: 'Help', url: '/help' },
-      { name: 'Privacy Policy', url: '/privacy' },
+      { name: 'Our Services', url: '/ourservices' },
       { name: 'About Us', url: '/about' },
-      { name: 'Refunds & Returns', url: '/returns' },
-      { name: 'Help & FAQ\'s', url: '/faq' },
+      { name: 'Our Team', url: '/teams' },
+      { name: 'Contact Us', url: '/contact' },
     ],
     contact_phone: '+010 234 789234',
     contact_fax: '+010 435 579892',
@@ -36,6 +34,7 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
     powered_by_url: 'https://infinitygalactech.com',
   };
 
+  // Use defaultFooterData if footerData is undefined, and merge with provided data
   const {
     logo_url = defaultFooterData.logo_url,
     logo_alt = defaultFooterData.logo_alt,
@@ -47,7 +46,7 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
     contact_address = defaultFooterData.contact_address,
     powered_by = defaultFooterData.powered_by,
     powered_by_url = defaultFooterData.powered_by_url,
-  } = footerData || {};
+  } = footerData || defaultFooterData;
 
   return (
     <div className="text-white mt-10">
@@ -58,7 +57,7 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
           backgroundSize: 'cover',
         }}
       >
-        <div className=" md:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
+        <div className="md:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
           <div className="flex-1">
             <div className="flex items-center mb-12">
               <img
@@ -68,20 +67,19 @@ const Footer: React.FC<{ footerData: FooterData }> = ({ footerData }) => {
                 src={logo_url}
                 width="50"
               />
-              <div className=''>
+              <div className="">
                 <h1 className="text-2xl font-bold text-white">HairCutter</h1>
                 <p className="text-sm text-white">BARBER SHOP</p>
               </div>
             </div>
             <p className="mb-4 text-white mb-15">{description}</p>
-
           </div>
           <div className="flex-1 md:ps-15">
             <h2 className="text-xl font-bold mb-10 text-white">USEFUL LINKS</h2>
             <ul className="space-y-2">
               {useful_links.map((link, index) => (
-                <li key={index} className='mb-5'>
-                  <a className="hover:underline text-white " href={link.url}>
+                <li key={index} className="mb-5">
+                  <a className="hover:underline text-white" href={link.url}>
                     {link.name}
                   </a>
                 </li>
