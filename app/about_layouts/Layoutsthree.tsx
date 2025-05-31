@@ -169,32 +169,6 @@ export default function Layoutsthree({
               ))}
             </ul>
           </div>
-          <div className="pt-10">
-            <Link href="/about">
-              <button
-                className="border inline-block rounded-xl px-3 py-2 flex items-center hover:bg-gray-100 transition-colors duration-300"
-                aria-label="Read more about Muskan Threading"
-              >
-                <span>Read More</span>
-                <svg
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M7 17L17 7M17 7H8M17 7V16"
-                    stroke="#000000"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </Link>
-          </div>
         </div>
       </div>
     </section>

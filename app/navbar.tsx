@@ -53,11 +53,17 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
           </Link>
         </div>
         <div className="flex flex-col items-center space-y-4 mt-10">
-          {menuItems.map((item, index) => (
-            <Link key={index} href={item.url} className="text-gray-700 hover:text-gray-900 font-medium">
-              {item.name}
-            </Link>
-          ))}
+{menuItems.map((item, index) => (
+  <Link
+    key={index}
+    href={item.url}
+    onClick={() => setIsOpen(false)}
+    className="text-gray-700 hover:text-gray-900 font-medium"
+  >
+    {item.name}
+  </Link>
+))}
+
         </div>
       </div>
 

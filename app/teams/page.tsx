@@ -213,7 +213,7 @@ export default async function TeamsPage() {
     }
 
     return (
-      <Suspense fallback={<div className="container mx-auto px-4 py-8 text-center">Loading...</div>}>
+      <Suspense fallback={<div className="container mx-auto px-4 py-4 text-center">Loading...</div>}>
         <div>
           <Teamlayoutone {...data.hero} />
           <Teamlayouttwo teamMembers={data.teamMembers} />

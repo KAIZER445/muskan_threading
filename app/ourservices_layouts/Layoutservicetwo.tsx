@@ -38,10 +38,10 @@ export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
 
   return (
     <section className="container mx-auto px-5 lg:px-[50px] py-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {services.map((service, index) => (
-          <div key={index} className="flex  gap-4">
-            <div className="relative w-full h-64"> {/* Fixed aspect ratio container */}
+          <div key={index} className="flex gap-6">
+            <div className="relative w-[170px] h-[200px] shrink-0">
               {getImageUrl(service.image) ? (
                 <Image
                   src={getImageUrl(service.image)}
@@ -54,6 +54,13 @@ export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
                       console.error(`Failed to load image for ${service.title}: ${getImageUrl(service.image)}`);
                     }
                     e.currentTarget.style.display = 'none'; // Hide image on error
+                  }}
+                  onLoadingComplete={(img) => {
+                    if (process.env.NODE_ENV !== 'production') {
+                      console.log(
+                        `Image loaded for ${service.title}: ${img.naturalWidth}x${img.naturalHeight}px`
+                      );
+                    }
                   }}
                 />
               ) : null}

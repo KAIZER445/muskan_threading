@@ -182,15 +182,7 @@ const Hero: React.FC<HeroProps> = ({ hero }) => {
           <h2 className="text-4xl md:text-5xl font-playfair font-bold text-white mb-4 ">
             {hero.hero_title?.split(' ').slice(-1)[0] || 'Muskan'}
           </h2>
-          <p className="text-gray-600 mb-8 text-[18px] md:w-110">{hero.hero_description || 'There are many variations'}</p>
-          <a
-            className="bg-purple-700 text-white py-3 px-6 rounded-full flex items-center justify-center inline-block shadow-md"
-            style={{ boxShadow: '0 3px 10px rgba(79, 37, 151, 0.58)' }}
-            href={hero.hero_button_link || '/booking'}
-          >
-            <i className="fas fa-calendar-alt mr-2"></i>
-            {hero.hero_button_text || 'Book Now'}
-          </a>
+          <p className="text-gray-600 mb-8 text-[18px] md:w-110 font-semibold">{hero.hero_description || 'There are many variations'}</p>
         </div>
         <div className="hidden md:flex mt-8 md:mt-0 justify-end">
           <div className="relative layerImage">

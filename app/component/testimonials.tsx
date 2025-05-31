@@ -30,13 +30,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
           </div>
           <h1 className="text-4xl font-bold mb-4">{testimonials.testimonials_title || 'What Our Clients Say'}</h1>
           <p className="text-gray-600 mb-6">{testimonials.testimonials_description || 'Hear from our happy customers'}</p>
-          <a
-            className="bg-purple-700 text-white px-6 py-2 rounded-full flex items-center inline-block"
-            href={testimonials.testimonials_button_link || '/reviews'}
-          >
-            {testimonials.testimonials_button_text || 'Read More'}
-            <i className="fas fa-arrow-right ml-2"></i>
-          </a>
+
           <div className="flex mt-6">
             {testimonials.customer_images?.slice(0, 4).map((img, i) => (
               <img

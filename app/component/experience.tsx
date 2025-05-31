@@ -40,13 +40,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_clay_masks_title || 'Clay Masks'}</h1>
             <p className="text-gray-600 mb-4">{services.services_clay_masks_description || 'Relax with our masks'}</p>
-            <a
-              className="bg-purple-700 text-white px-4 py-2 rounded-full absolute bottom-8 inline-block"
-              href={services.services_clay_masks_link || '/shop'}
-            >
-              <i className="fas fa-shopping-cart mr-2"></i>
-              Shop Now
-            </a>
+
           </div>
         </div>
         <div className="relative rounded-lg">
@@ -61,13 +55,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_wellness_spa_title || 'Wellness Spa'}</h1>
             <p className="text-gray-600 mb-4">{services.services_wellness_spa_description || 'Indulge in wellness'}</p>
-            <a
-              className="bg-purple-700 text-white px-4 py-2 rounded-full absolute bottom-8 inline-block"
-              href={services.services_wellness_spa_link || '/shop'}
-            >
-              <i className="fas fa-shopping-cart mr-2"></i>
-              Shop Now
-            </a>
+
           </div>
         </div>
       </div>

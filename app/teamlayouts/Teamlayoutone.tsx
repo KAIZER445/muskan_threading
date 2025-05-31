@@ -18,7 +18,7 @@ const Teamlayoutone: React.FC<TeamLayoutOneProps> = ({
 }) => {
   return (
     <div className="container mx-auto lg:px-30 px-5">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full pt-10 pb-5 space-y-4 md:space-y-0 pt-30">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full pb-5 space-y-4 md:space-y-0 pt-15">
         {/* Left Side: Icon + Text */}
         <div className="border-2 rounded-3xl px-3 flex items-center space-x-2">
           <div className="flex items-center space-x-2 text-sm p-1">
@@ -35,20 +35,7 @@ const Teamlayoutone: React.FC<TeamLayoutOneProps> = ({
           <p>{description}</p>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between items-center w-full max-w-7xl mx-auto py-4">
-        <div className="text-sm text-gray-700 mb-2 sm:mb-0">
-          <p>{subtitle}</p>
-        </div>
-        <Link
-          href={ctaLink}
-          className="flex items-center border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition duration-200"
-        >
-          <span className="text-sm text-gray-700 mr-2">{ctaText}</span>
-          <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </Link>
-      </div>
+
     </div>
   );
 };

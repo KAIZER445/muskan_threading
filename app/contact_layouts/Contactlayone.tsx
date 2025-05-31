@@ -26,10 +26,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
 }) => {
   // Use provided currentPacificTime or calculate it
   const now = currentPacificTime || new Date();
-  // Adjust to Pacific Time using date-fns-tz (requires installation: npm install date-fns-tz)
-  // import { utcToZonedTime } from 'date-fns-tz';
-  // const pacificTime = utcToZonedTime(now, 'America/Los_Angeles');
-  // For now, use a manual offset (approximate, consider DST)
+  // Adjust to Pacific Time using manual offset (approximate, considering DST)
   const pacificOffset = -7 * 60 * 60 * 1000 - (45 * 60 * 1000); // UTC-7 (PDT) - Nepal offset
   const pacificTime = new Date(now.getTime() + pacificOffset);
   const currentDay = pacificTime.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday
@@ -67,7 +64,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512.002 512.002"
-      className="w-8 h-8 sm:w-10 sm:h-10"
+      className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
     >
       <g>
         <path d="M486.4,272.304H48.257c-17.468,0-31.68,14.212-31.68,31.68c0,14.632,9.974,26.973,23.478,30.597
@@ -108,7 +105,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
       height="32px"
       viewBox="0 0 32 32"
       enable-background="new 0 0 32 32"
-      className="w-8 h-8 sm:w-10 sm:h-10"
+      className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
     >
       <g>
         <path
@@ -158,7 +155,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
       height="32px"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-8 h-8 sm:w-10 sm:h-10"
+      className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
     >
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2zm0 4h2v6h-2z"/>
     </svg>,
@@ -170,44 +167,48 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
       height="32px"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-8 h-8 sm:w-10 sm:h-10"
+      className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
     >
       <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4 1.84-2.82 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
     </svg>,
   ];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-20 py-8 sm:py-10 md:py-15">
-      <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-        <div className="w-full md:w-2/3">
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-8 sm:py-10 md:py-12 lg:py-15">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8">
+        {/* Left Section: Title, Description, Services */}
+        <div className="w-full md:w-1/2 lg:w-2/3">
           <div className="pt-3">
-            <h1 className="font-semibold text-2xl sm:text-3xl uppercase px-4 sm:px-6 md:px-10 leading-relaxed tracking-wide">
+            <h1 className="font-semibold text-xl sm:text-2xl md:text-3xl uppercase px-4 sm:px-6 md:px-8 lg:px-10 leading-relaxed tracking-wide">
               {title}
             </h1>
-            <p className="px-4 sm:px-6 md:px-10 pt-6 md:pt-10 text-justify text-base sm:text-lg leading-relaxed">
+            <p className="px-4 sm:px-6 md:px-8 lg:px-10 pt-4 sm:pt-6 md:pt-8 lg:pt-10 text-justify text-sm sm:text-base md:text-lg leading-relaxed">
               {description}
             </p>
           </div>
-          <div className="pt-8 md:pt-15 px-4 sm:px-6 md:px-10 flex flex-col sm:flex-row gap-4 sm:gap-6">
+          <div className="pt-6 sm:pt-8 md:pt-10 lg:pt-15 px-4 sm:px-6 md:px-8 lg:px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="border rounded-lg bg-purple-200 border-gray-400 border-2 sm:border-3 w-full sm:w-auto"
+                className="border rounded-lg bg-purple-200 border-gray-400 border-2 sm:border-3 w-full"
               >
-                <div className="flex items-center justify-center gap-3 sm:gap-5 px-2 sm:px-3 py-3 sm:py-5">
+                <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4">
                   {serviceIcons[index] || serviceIcons[1]}
-                  <p className="uppercase font-bold text-sm sm:text-base">{service}</p>
+                  <p className="uppercase font-bold text-xs sm:text-sm md:text-base">{service}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <div className="w-full md:w-1/3">
+
+        {/* Right Section: Address and Opening Hours */}
+        <div className="w-full md:w-1/2 lg:w-1/3">
           <div className="mb-5 md:mb-0 px-2 sm:px-4">
-            <div className="bg-purple-400 text-white font-bold py-5 sm:py-7 shadow-lg relative overflow-hidden">
-              <div className="px-3 sm:px-6 lg:px-10">
+            {/* Address Block */}
+            <div className="bg-purple-400 text-white font-bold py-4 sm:py-5 md:py-6 lg:py-7 shadow-lg relative overflow-hidden">
+              <div className="px-3 sm:px-4 md:px-6 lg:px-8">
                 {addressLines.map((line, index) => (
-                  <p key={index} className="py-1 sm:py-2 text-sm sm:text-base">{line}</p>
+                  <p key={index} className="py-1 sm:py-1.5 md:py-2 text-xs sm:text-sm md:text-base">{line}</p>
                 ))}
               </div>
               <div className="absolute -right-5 -bottom-5">
@@ -219,7 +220,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
                   width="80px"
                   height="80px"
                   viewBox="0 0 31.603 31.603"
-                  className="opacity-20 sm:w-[110px] sm:h-[110px]"
+                  className="opacity-20 sm:w-[90px] sm:h-[90px] md:w-[100px] md:h-[100px] lg:w-[110px] lg:h-[110px]"
                 >
                   <g>
                     <path d="M7.703,15.973c0,0,5.651-5.625,5.651-10.321C13.354,2.53,10.824,0,7.703,0S2.052,2.53,2.052,5.652
@@ -243,9 +244,11 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
                 </svg>
               </div>
             </div>
-            <div className="opening w-full shadow-lg pb-8 sm:pb-10 md:pb-15">
-              <div className="flex justify-between px-3 sm:px-6 lg:px-10 w-full py-4 pt-8 sm:pt-10 md:pt-15">
-                <p className="uppercase font-semibold text-lg sm:text-xl">
+
+            {/* Opening Hours Block */}
+            <div className="opening w-full shadow-lg pb-6 sm:pb-8 md:pb-10 lg:pb-15">
+              <div className="flex justify-between px-3 sm:px-4 md:px-6 lg:px-8 w-full py-4 pt-6 sm:pt-8 md:pt-10 lg:pt-15">
+                <p className="uppercase font-semibold text-base sm:text-lg md:text-xl">
                   Opening <br /> Hours
                 </p>
                 <svg
@@ -255,27 +258,27 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
                   viewBox="0 0 32 32"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 sm:w-10 sm:h-10"
+                  className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
                 >
                   <title>clock</title>
                   <path d="M0 7.008q0 1.856 0.992 3.52 1.184-3.328 3.712-5.824t5.824-3.712q-1.696-0.992-3.52-0.992-2.912 0-4.96 2.080t-2.048 4.928zM2.016 16q0 2.784 1.056 5.312t2.944 4.48v4.224q0 0.832 0.576 1.408t1.408 0.576 1.408-0.576 0.608-1.408v-1.408q2.912 1.408 5.984 1.408t6.016-1.408v1.408q0 0.832 0.576 1.408t1.408 0.576 1.408-0.576 0.608-1.408v-4.224q1.888-1.952 2.944-4.448t1.056-5.344-1.12-5.44-2.976-4.48-4.48-2.976-5.44-1.12-5.44 1.12-4.48 2.976-2.976 4.48-1.088 5.44zM6.016 16q0-2.048 0.768-3.872t2.144-3.2 3.2-2.144 3.872-0.8q2.72 0 5.024 1.344t3.648 3.648 1.344 5.024q0 2.016-0.8 3.872t-2.144 3.2-3.2 2.144-3.872 0.768q-2.72 0-5.024-1.312t-3.616-3.648-1.344-5.024zM14.016 16q0 0.832 0.576 1.408t1.408 0.576h4q0.832 0 1.408-0.576t0.608-1.408-0.608-1.408-1.408-0.608h-1.984v-1.984q0-0.832-0.608-1.408t-1.408-0.608-1.408 0.608-0.576 1.408v4zM21.472 0.992q3.328 1.216 5.824 3.712t3.712 5.824q0.992-1.664 0.992-3.52 0-2.88-2.048-4.928t-4.96-2.080q-1.824 0-3.52 0.992z"></path>
                 </svg>
               </div>
-              <div className="px-3 sm:px-6 lg:px-10">
+              <div className="px-3 sm:px-4 md:px-6 lg:px-8">
                 {openingHours.map((hour, index) => (
                   <div
                     key={index}
-                    className={`py-2 sm:py-3 ${hour.day === todayName ? 'bg-[#E5E5E5] font-bold rounded-lg p-2' : ''}`}
+                    className={`py-1 sm:py-2 md:py-3 ${hour.day === todayName ? 'bg-[#E5E5E5] font-bold rounded-lg p-2' : ''}`}
                   >
-                    <p className="uppercase text-purple-400 text-sm sm:text-base font-bold">
+                    <p className="uppercase text-purple-400 text-xs sm:text-sm md:text-base font-bold">
                       {hour.day}
                       {hour.day === todayName && (
-                        <span className="ml-2 text-gray-400 font-bold text-xs">
+                        <span className="ml-2 text-gray-400 font-bold text-xs sm:text-sm">
                           {isOpen ? '(Open Now)' : '(Closed)'}
                         </span>
                       )}
                     </p>
-                    <p className="text-black font-bold text-base sm:text-lg">{hour.time}</p>
+                    <p className="text-black font-bold text-sm sm:text-base md:text-lg">{hour.time}</p>
                   </div>
                 ))}
               </div>

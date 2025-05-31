@@ -26,10 +26,9 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
       { name: 'Our Team', url: '/teams' },
       { name: 'Contact Us', url: '/contact' },
     ],
-    contact_phone: '+010 234 789234',
-    contact_fax: '+010 435 579892',
+    contact_phone: '+(949) 858-8661 || (949) 347-0648',
     contact_email: 'info@mustachea.com',
-    contact_address: '1394 Argonne Street, New Castle, USA',
+    contact_address: '22461 Antonio Pkwy, #A150, R.S.M., CA 92688 || 27660 Marguerite Pkwy, #D, Mission Viejo, CA 92692',
     powered_by: 'Infinitygalactech',
     powered_by_url: 'https://infinitygalactech.com',
   };
@@ -92,15 +91,14 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
               <span className="font-bold">Phone:</span> {contact_phone}
             </p>
             <p className="mb-2 text-white">
-              <span className="font-bold">Fax:</span> {contact_fax}
-            </p>
-            <p className="mb-2 text-white">
               <span className="font-bold">Email:</span>{' '}
               <a href={`mailto:${contact_email}`} className="hover:underline">
                 {contact_email}
               </a>
             </p>
-            <p className="mb-2 text-white">{contact_address}</p>
+            <p className="mb-2 text-white">
+              <span className="font-bold">Address:</span>{' '}
+              {contact_address}</p>
           </div>
         </div>
       </footer>

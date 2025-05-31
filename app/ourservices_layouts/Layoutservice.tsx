@@ -16,14 +16,7 @@ export default function Layoutservice({ title, description, buttonText, buttonLi
         </div>
         <p className="text-center py-2">{description}</p>
         <div className="flex justify-center py-4">
-          <Link href={buttonLink}>
-            <button
-              className="bg-[#b5a580] text-white px-3 py-2 tracking-widest rounded-lg hover:bg-[#a09470] transition-colors duration-300"
-              aria-label={`Navigate to ${buttonText}`}
-            >
-              {buttonText}
-            </button>
-          </Link>
+
         </div>
       </div>
     </section>
