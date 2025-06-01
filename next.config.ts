@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,7 @@ const nextConfig: NextConfig = {
         pathname: '/public/storage/**',
       },
     ],
+    unoptimized: true, // Required for static export with remote images
   },
 };
 

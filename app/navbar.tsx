@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
     <nav className="bg-white shadow-md z-10 relative">
       <div className="container w-full mx-auto flex items-center justify-between py-4 px-6 md:hidden">
         <div className="text-2xl font-bold">
-          <Link href="#" className="text-black">
+          <Link href="/" className="text-black">
             LA NOTTÉ <span className="text-sm font-normal block text-center">NAIL STUDIO</span>
           </Link>
         </div>

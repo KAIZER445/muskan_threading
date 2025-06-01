@@ -171,7 +171,7 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
 async function fetchTeamsData(): Promise<TeamsPageData> {
   try {
     const res = await fetch('https://backend.muskanthreading.com/api/teampage', {
-      next: { revalidate: 0 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -201,8 +201,6 @@ export const metadata = {
   },
 };
 
-// Force dynamic rendering to handle revalidate: 0
-export const dynamic = 'force-dynamic';
 
 export default async function TeamsPage() {
   try {

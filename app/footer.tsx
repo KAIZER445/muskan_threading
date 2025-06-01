@@ -18,8 +18,8 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
 
   const defaultFooterData: FooterData = {
     logo_url: 'https://storage.googleapis.com/a1aa/image/nsDonQZpOC_iGqYaLLjOPci7TduirUJcttEx53cD3Z0.jpg',
-    logo_alt: 'HairCutter logo',
-    description: 'Etiam semper nibh orci, ac tincidunt mi consectetur a. In quis tortor ex. Morbi cursus sed neque quis dictum.',
+    logo_alt: 'Muskan Threading logo',
+    description: 'Transform your look with our expert threading services, designed for flawless brows and smooth skin.',
     useful_links: [
       { name: 'Our Services', url: '/ourservices' },
       { name: 'About Us', url: '/about' },

@@ -112,7 +112,7 @@ function transformApiData(apiData: ApiResponse['data']): ServicesPageData {
 // Fetch data from the API
 async function fetchServicesData(): Promise<ServicesPageData> {
   const res = await fetch('https://backend.muskanthreading.com/api/servicepage', {
-    next: { revalidate: 0 }, // Revalidate on every refresh
+    next: { revalidate: 60 }, // Revalidate on every refresh
   });
 
   if (!res.ok) {
@@ -142,9 +142,6 @@ export const metadata = {
     type: 'website',
   },
 };
-
-// Force dynamic rendering to handle revalidate: 0
-export const dynamic = 'force-dynamic';
 
 export default async function ServicesPage() {
   try {
