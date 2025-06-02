@@ -27,7 +27,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate__animated', 'animate__backInDown');
+          entry.target.classList.add('animate__animated', 'animate__fadeInUp');
           observer.unobserve(entry.target); // Stop observing after animation
         }
       },
@@ -40,7 +40,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="md:px-15">
+    <div ref={sectionRef} className="md:px-15 font-poppins">
       <div className="flex flex-col md:flex-row items-center md:items-start">
         <div className="md:w-1/2 p-4">
           <div className="flex items-center mb-4">
@@ -57,7 +57,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
                 alt={`Customer ${i + 1}`}
                 className="w-10 h-10 rounded-full border-2 border-white -ml-2"
                 height="40"
-                src={img || '/default-avatar.png'}
+                src={img ? `https://backend.muskanthreading.com/public/storage/${img}` : '/default-avatar.png'}
                 width="40"
               />
             ))}

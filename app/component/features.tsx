@@ -22,11 +22,11 @@ const Features: React.FC<FeaturesProps> = ({ features }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate__animated', 'animate__backInDown');
+          entry.target.classList.add('animate__animated', 'animate__fadeInUp');
           observer.unobserve(entry.target); // Stop observing after animation
         }
       },
-      { threshold: 0.1 } // Trigger when 10% of the section is visible
+      { threshold: 0.8 } // Trigger when 10% of the section is visible
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);

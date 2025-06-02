@@ -1,4 +1,8 @@
+// components/Layoutsone.tsx
+'use client';
+
 import Image from 'next/image';
+import React, { useEffect, useRef } from 'react';
 
 interface LayoutOneProps {
   title: string;
@@ -13,6 +17,26 @@ export default function Layoutsone({ title, subtitle, description, image }: Layo
 
   // Log incoming props for debugging
   console.log('Layoutsone Props:', { title, subtitle, description, image });
+
+  // Reference for the section to observe
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  // Set up Intersection Observer for animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect(); // Cleanup on unmount
+  }, []);
 
   // Helper function to construct image URL
   const getImageUrl = (image: string | null): string => {
@@ -35,7 +59,10 @@ export default function Layoutsone({ title, subtitle, description, image }: Layo
   };
 
   return (
-    <section className="container mx-auto py-20 flex flex-col md:flex-row px-2 lg:px-[30px]">
+    <section
+      ref={sectionRef}
+      className="container mx-auto lg:pt-10 lg:pb-0 py-10 flex flex-col md:flex-row px-2 lg:px-[30px] font-poppins"
+    >
       {/* Left side - text */}
       <div className="w-full md:w-1/2 p-4">
         <div

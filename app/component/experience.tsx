@@ -26,7 +26,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate__animated', 'animate__backInDown');
+          entry.target.classList.add('animate__animated', 'animate__fadeInUp');
           observer.unobserve(entry.target); // Stop observing after animation
         }
       },
@@ -39,7 +39,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="py-8 md:px-15">
+    <div ref={sectionRef} className="py-8 md:px-15 font-poppins">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">
           <span className="pe-2">{main.main_title?.split(' ').slice(0, -2).join(' ') || 'Our Spa'}</span>

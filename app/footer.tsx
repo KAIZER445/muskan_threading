@@ -48,7 +48,7 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
   } = footerData || defaultFooterData;
 
   return (
-    <div className="text-white mt-10">
+    <div className="text-white">
       <footer
         className="px-20 pt-22 pb-10 bg-gray-900"
         style={{
