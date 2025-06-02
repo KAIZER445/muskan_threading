@@ -1,4 +1,8 @@
-import React from 'react';
+// components/ContactLayOne.tsx
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 // Define the OpeningHour type
 interface OpeningHour {
@@ -13,7 +17,6 @@ interface ContactLayOneProps {
   services: string[];
   addressLines: string[];
   openingHours: OpeningHour[];
-  currentPacificTime?: Date; // Optional prop for current time
 }
 
 const ContactLayOne: React.FC<ContactLayOneProps> = ({
@@ -22,21 +25,40 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
   services,
   addressLines,
   openingHours,
-  currentPacificTime,
 }) => {
-  // Use provided currentPacificTime or calculate it
-  const now = currentPacificTime || new Date();
-  // Adjust to Pacific Time using manual offset (approximate, considering DST)
-  const pacificOffset = -7 * 60 * 60 * 1000 - (45 * 60 * 1000); // UTC-7 (PDT) - Nepal offset
-  const pacificTime = new Date(now.getTime() + pacificOffset);
-  const currentDay = pacificTime.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday
-  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const todayName = dayNames[currentDay]; // Current day in Pacific Time
+  const [currentPacificTime, setCurrentPacificTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPacificTime(new Date());
+    }, 1000); // Update every second
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  // Format Pacific Time using Intl.DateTimeFormat
+  const pacificFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  });
+  const currentTimePacific = pacificFormatter.format(currentPacificTime);
+
+  const dayFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    weekday: 'long',
+  });
+  const todayName = dayFormatter.format(currentPacificTime);
 
   // Highlight today's hours and determine if open
   const todayHours = openingHours.find((hour) => hour.day === todayName);
-  const currentHourPacific = pacificTime.getHours();
-  const currentMinutesPacific = pacificTime.getMinutes();
+  const [currentHourPacific, currentMinutePacific] = currentPacificTime
+    .toLocaleString('en-US', { timeZone: 'America/Los_Angeles', hour12: false, hour: '2-digit', minute: '2-digit' })
+    .split(':')
+    .map(Number);
+  const currentTimeInHours = currentHourPacific + currentMinutePacific / 60;
+
   const isOpen = todayHours
     ? (() => {
         const [openTime, closeTime] = todayHours.time.split(' - ').map((t) => {
@@ -47,8 +69,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
           if (period === 'AM' && hourNum === 12) hourNum = 0;
           return hourNum + parseInt(minutes) / 60;
         });
-        const currentTime = currentHourPacific + currentMinutesPacific / 60;
-        return currentTime >= openTime && currentTime <= closeTime;
+        return currentTimeInHours >= openTime && currentTimeInHours <= closeTime;
       })()
     : false;
 
@@ -71,7 +92,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
           c3.797,52.214,47.49,93.537,100.657,93.537h40.886c53.251,0,96.997-41.456,100.671-93.789c0.087-0.055,0.182-0.096,0.267-0.155
           l15.512-10.664H486.4c14.117,0,25.602-11.485,25.602-25.602C512.001,283.789,500.516,272.304,486.4,272.304z M181.596,411.17
           H140.71c-43.446,0-79.293-33.164-83.556-75.505h207.996C260.889,378.005,225.042,411.17,181.596,411.17z M486.4,306.561H295.416
-          c-1.714,0-3.388,0.52-4.801,1.49l-15.512,10.664h-1.053H48.257c-8.123,0-14.731-6.609-14.731-14.731
+          c-1.714,0-3.388,0.520-4.801,1.49l-15.512,10.664h-1.053H48.257c-8.123,0-14.731-6.609-14.731-14.731
           c0-8.123,6.609-14.731,14.731-14.731h438.142c4.771,0,8.654,3.882,8.654,8.654S491.171,306.561,486.4,306.561z"/>
         <path d="M486.933,173.137H257.432c-2.723,0-5.412-0.438-7.993-1.3c-4.437-1.486-9.24,0.91-10.725,5.347
           c-1.485,4.439,0.91,9.24,5.348,10.725c4.317,1.444,8.815,2.177,13.37,2.177h229.504c4.475,0,8.118,3.642,8.118,8.118
@@ -174,7 +195,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
   ];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-8 sm:py-10 md:py-12 lg:py-15">
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-8 sm:py-10 md:py-12 lg:py-15 font-poppins">
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8">
         {/* Left Section: Title, Description, Services */}
         <div className="w-full md:w-1/2 lg:w-2/3">
@@ -265,6 +286,9 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
                 </svg>
               </div>
               <div className="px-3 sm:px-4 md:px-6 lg:px-8">
+                <div className="text-sm sm:text-base md:text-lg font-bold text-purple-400 mb-2">
+                  Current Time: {currentTimePacific} (PT)
+                </div>
                 {openingHours.map((hour, index) => (
                   <div
                     key={index}

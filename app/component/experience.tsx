@@ -1,5 +1,6 @@
-// app/Experience.tsx
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 
 interface SpaExperienceProps {
   main: {
@@ -19,8 +20,26 @@ interface SpaExperienceProps {
 }
 
 const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__animated', 'animate__backInDown');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect(); // Cleanup on unmount
+  }, []);
+
   return (
-    <div className="py-8 md:px-15">
+    <div ref={sectionRef} className="py-8 md:px-15">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">
           <span className="pe-2">{main.main_title?.split(' ').slice(0, -2).join(' ') || 'Our Spa'}</span>
@@ -40,14 +59,13 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_clay_masks_title || 'Clay Masks'}</h1>
             <p className="text-gray-600 mb-4">{services.services_clay_masks_description || 'Relax with our masks'}</p>
-
           </div>
         </div>
         <div className="relative rounded-lg">
           <div
             className="absolute w-full h-full rounded-lg"
             style={{
-                            backgroundImage: `url(${services?.services_wellness_spa_image ? `https://backend.muskanthreading.com/public/storage/${services.services_clay_masks_image}` : '/makeup.jpg'})`,
+              backgroundImage: `url(${services?.services_wellness_spa_image ? `https://backend.muskanthreading.com/public/storage/${services.services_wellness_spa_image}` : '/makeup.jpg'})`,
               backgroundSize: 'cover',
               backgroundPosition: 'left'
             }}
@@ -55,7 +73,6 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_wellness_spa_title || 'Wellness Spa'}</h1>
             <p className="text-gray-600 mb-4">{services.services_wellness_spa_description || 'Indulge in wellness'}</p>
-
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
-// app/Testimonials.tsx
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 
 interface TestimonialsProps {
   testimonials: {
@@ -20,8 +21,26 @@ interface TestimonialsProps {
 }
 
 const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__animated', 'animate__backInDown');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect(); // Cleanup on unmount
+  }, []);
+
   return (
-    <div className="md:px-15">
+    <div ref={sectionRef} className="md:px-15">
       <div className="flex flex-col md:flex-row items-center md:items-start">
         <div className="md:w-1/2 p-4">
           <div className="flex items-center mb-4">

@@ -27,7 +27,7 @@ const Hero: React.FC<HeroProps> = ({ hero }) => {
           'polygon(0% 0% ,100% 0%, 100% 77%, 0% 100%',
       }}
     >
-      <div className="container mx-auto py-16 flex flex-col md:flex-row items-center relative">
+      <div className="container animate__backInDown mx-auto py-16 flex flex-col md:flex-row items-center relative">
       <div className='absolute top-15 md:block hidden'>
             <svg className='absolute start-15 top-4' height="70px" width="70px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512">

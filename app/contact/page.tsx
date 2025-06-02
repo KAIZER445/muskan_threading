@@ -273,7 +273,6 @@ export default async function ContactPage() {
         services={data.hero.services}
         addressLines={data.hero.addressLines}
         openingHours={data.hero.openingHours}
-        currentPacificTime={data.hero.currentPacificTime}
       />
       {/* Uncomment when ready */}
       {/* <Contactlaythree

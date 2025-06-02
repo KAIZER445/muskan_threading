@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
     key={index}
     href={item.url}
     onClick={() => setIsOpen(false)}
-    className="text-gray-700 hover:text-gray-900 font-medium"
+    className="text-gray-700 hover:text-gray-900 font-bold"
   >
     {item.name}
   </Link>
@@ -69,10 +69,10 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
 
       <div className="container mx-auto flex items-center justify-center py-4 px-6 hidden md:flex">
         <div className="flex space-x-4 mr-12">
-          <Link href="/about" className="text-gray-700 hover:text-gray-900 font-medium">
+          <Link href="/about" className="text-gray-700 hover:text-gray-900 font-bold">
             About
           </Link>
-          <Link href="/ourservices" className="text-gray-700 hover:text-gray-900 font-medium">
+          <Link href="/ourservices" className="text-gray-700 hover:text-gray-900 font-bold">
             Our Services
           </Link>
         </div>
@@ -82,10 +82,10 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
           </Link>
         </div>
         <div className="flex items-center space-x-4 ml-12">
-          <Link href="/teams" className="text-gray-700 hover:text-gray-900 font-medium">
+          <Link href="/teams" className="text-gray-700 hover:text-gray-900 font-bold">
             Our Team
           </Link>
-          <Link href="/contact" className="text-gray-700 hover:text-gray-900 font-medium">
+          <Link href="/contact" className="text-gray-700 hover:text-gray-900 font-bold">
             Contact US
           </Link>
         </div>

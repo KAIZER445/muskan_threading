@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import 'animate.css';
 
 .cls-1{fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:1.91px;}
 

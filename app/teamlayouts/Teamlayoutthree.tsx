@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 
 // Counter props type
@@ -11,11 +11,13 @@ type CounterProps = {
 };
 
 // Counter component
-const Counter = ({ value, label, suffix }: CounterProps) => {
+const Counter = ({ value, label, suffix, isVisible }: CounterProps & { isVisible: boolean }) => {
   const [count, setCount] = useState<number>(0);
   const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10) || 0; // Extract numeric part
 
   useEffect(() => {
+    if (!isVisible) return;
+
     let start = 0;
     const end = numericValue;
     if (start === end) return;
@@ -33,7 +35,7 @@ const Counter = ({ value, label, suffix }: CounterProps) => {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [numericValue]);
+  }, [numericValue, isVisible]);
 
   return (
     <div className="flex flex-col items-center" aria-live="polite">
@@ -59,6 +61,8 @@ export default function Teamlayoutthree({
   overlayImage,
   counters,
 }: TeamLayoutThreeProps) {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
 
   // Helper function to construct image URL
@@ -76,11 +80,33 @@ export default function Teamlayoutthree({
     return url;
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target); // Stop observing after triggering
+        }
+      },
+      { threshold: 0.6 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const backgroundUrl = getImageUrl(backgroundImage, 'background');
   const overlayUrl = getImageUrl(overlayImage, 'overlay');
 
   return (
-    <div className="container mx-auto lg:pt-20 pt-8 relative ">
+    <div ref={sectionRef} className="container mx-auto lg:pt-20 pt-8 relative ">
       <div className="relative w-full overflow-hidden" style={{ height: `${Math.max(30, counters.length * 10)}rem` }}>
         {/* Background Image or Placeholder */}
         <div className="absolute inset-0 z-0">
@@ -121,7 +147,7 @@ export default function Teamlayoutthree({
           <div className="rounded-lg px-8 flex flex-col md:flex-row items-center justify-around w-full max-w-5xl mx-auto">
             {counters.map((counter, index) => (
               <div key={index} className="flex items-center justify-center space-x-6 py-4">
-                <Counter {...counter} />
+                <Counter {...counter} isVisible={isVisible} />
                 {index !== counters.length - 1 && (
                   <div className="hidden " />
                 )}

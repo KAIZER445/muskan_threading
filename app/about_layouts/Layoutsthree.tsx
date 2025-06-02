@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { useEffect, useRef } from 'react';
 
 interface Feature {
   name: string;
@@ -23,6 +26,24 @@ export default function Layoutsthree({
   image2,
   towel_icon,
 }: LayoutThreeProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__animated', 'animate__backInLeft');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect(); // Cleanup on unmount
+  }, []);
+
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
 
   // Helper function to construct image URL
@@ -59,7 +80,7 @@ export default function Layoutsthree({
     c80.848-20.213,131.507-59.993,152.856-79.868C487.679,103.161,521.113,280.885,449.538,354.373z`;
 
   return (
-    <section className="container mx-auto py-20 flex flex-col md:flex-row px-2 lg:px-[30px]">
+    <section ref={sectionRef} className="container mx-auto lg:py-5 flex flex-col md:flex-row px-2 lg:px-[30px]">
       {/* Left side images */}
       <div className="w-full md:w-1/2">
         <div className="flex flex-col sm:flex-row justify-center gap-4">

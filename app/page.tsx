@@ -106,11 +106,6 @@ export default async function Page() {
 
   return (
     <>
-      <Head>
-        <title>{hero.hero_title || 'Muskan Threading'}</title>
-        <meta name="description" content={main.main_description || 'Welcome to Muskan Threading'} />
-      </Head>
-
       <Hero hero={hero} />
       <div className="container mx-auto px-4">
         <div className="mb-16">
