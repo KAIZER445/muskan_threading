@@ -56,7 +56,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
               backgroundSize: 'cover'
             }}
           ></div>
-          <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
+          <div className="md:py-25 md:ps-15 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_clay_masks_title || 'Clay Masks'}</h1>
             <p className="text-gray-600 mb-4">{services.services_clay_masks_description || 'Relax with our masks'}</p>
           </div>
@@ -70,7 +70,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
               backgroundPosition: 'left'
             }}
           ></div>
-          <div className="md:py-25 md:ps-20 md:pe-60 p-20 z-5 relative">
+          <div className="md:py-25 md:ps-15 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_wellness_spa_title || 'Wellness Spa'}</h1>
             <p className="text-gray-600 mb-4">{services.services_wellness_spa_description || 'Indulge in wellness'}</p>
           </div>

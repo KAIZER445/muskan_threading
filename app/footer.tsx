@@ -58,18 +58,8 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
       >
         <div className="md:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
           <div className="flex-1">
-            <div className="flex items-center mb-12">
-              <img
-                alt={logo_alt}
-                className="mr-2"
-                height="50"
-                src={logo_url}
-                width="50"
-              />
-              <div className="">
-                <h1 className="text-2xl font-bold text-white">HairCutter</h1>
-                <p className="text-sm text-white">BARBER SHOP</p>
-              </div>
+            <div className="flex items-center mb-7">
+<img src="/company-logo.png" className='w-[250px]' alt="" />
             </div>
             <p className="mb-4 text-white mb-15">{description}</p>
           </div>
@@ -89,12 +79,6 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
             <h2 className="text-xl font-bold mb-4 text-white mb-10">CONTACT US</h2>
             <p className="mb-2 text-white">
               <span className="font-bold">Phone:</span> {contact_phone}
-            </p>
-            <p className="mb-2 text-white">
-              <span className="font-bold">Email:</span>{' '}
-              <a href={`mailto:${contact_email}`} className="hover:underline">
-                {contact_email}
-              </a>
             </p>
             <p className="mb-2 text-white">
               <span className="font-bold">Address:</span>{' '}

@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
       <div className="container w-full mx-auto flex items-center justify-between py-4 px-6 md:hidden">
         <div className="text-2xl font-bold">
           <Link href="/" className="text-black">
-            LA NOTTÉ <span className="text-sm font-normal block text-center">NAIL STUDIO</span>
+            <img src="/company-logo.png" className='w-[160px]' alt="" />
           </Link>
         </div>
         <button onClick={toggleMenu} className="text-gray-700 focus:outline-none" aria-label="Toggle menu">
@@ -47,9 +47,9 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
             </svg>
           </button>
         </div>
-        <div className="text-2xl font-bold text-center mb-4">
+        <div className="flex justify-center mb-4">
           <Link href="#" className="text-black">
-            LA NOTTÉ <span className="text-sm font-normal block">NAIL STUDIO</span>
+            <img src="/company-logo.png" className='w-[160px]' alt="" />
           </Link>
         </div>
         <div className="flex flex-col items-center space-y-4 mt-10">
@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
         </div>
         <div className="text-2xl font-bold">
           <Link href="/" className="text-black">
-            LA NOTTÉ <span className="text-sm font-normal block text-center">NAIL STUDIO</span>
+            <img src="/company-logo.png" className='w-[160px]' alt="" />
           </Link>
         </div>
         <div className="flex items-center space-x-4 ml-12">
