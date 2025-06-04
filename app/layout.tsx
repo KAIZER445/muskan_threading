@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   try {
-    const res = await fetch('https://backend.muskanthreading.com/api/homepage', {
+    const res = await fetch('https://muskan.infinitygalactech.com/api/homepage', {
       next: { revalidate: 600 },
     });
 

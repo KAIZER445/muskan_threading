@@ -170,7 +170,7 @@ function transformApiData(apiData: ApiResponse['data']): TeamsPageData {
 // Fetch data from the API
 async function fetchTeamsData(): Promise<TeamsPageData> {
   try {
-    const res = await fetch('https://backend.muskanthreading.com/api/teampage', {
+    const res = await fetch('https://muskan.infinitygalactech.com/api/teampage', {
       next: { revalidate: 60 },
     });
 

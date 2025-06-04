@@ -111,7 +111,7 @@ function transformApiData(apiData: ApiResponse['data']): ServicesPageData {
 
 // Fetch data from the API
 async function fetchServicesData(): Promise<ServicesPageData> {
-  const res = await fetch('https://backend.muskanthreading.com/api/servicepage', {
+  const res = await fetch('https://muskan.infinitygalactech.com/api/servicepage', {
     next: { revalidate: 60 }, // Revalidate on every refresh
   });
 

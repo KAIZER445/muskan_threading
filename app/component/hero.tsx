@@ -50,7 +50,7 @@ const Hero: React.FC<HeroProps> = ({ hero }) => {
               className="rounded-full w-[500] h-[500] object-cover"
               style={{ boxShadow: boxShadowStyle }}
 
-              src={hero.hero_image ? `https://backend.muskanthreading.com/public/storage/${hero.hero_image}` : '/default-hero.jpg'}
+              src={hero.hero_image ? `https://muskan.infinitygalactech.com/public/storage/${hero.hero_image}` : '/default-hero.jpg'}
             />
           </div>
         </div>

@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'backend.muskanthreading.com',
+        hostname: 'muskan.infinitygalactech.com',
         pathname: '/public/storage/**',
       },
     ],

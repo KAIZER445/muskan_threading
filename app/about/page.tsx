@@ -130,12 +130,12 @@ function transformApiData(apiData: ApiResponse['data']): AboutPageData {
 // Fetch data from the API with timeout
 async function fetchAboutData(): Promise<AboutPageData> {
   try {
-    console.log('Attempting to fetch data from API: https://backend.muskanthreading.com/api/aboutpage');
+    console.log('Attempting to fetch data from API: https://muskan.infinitygalactech.com/api/aboutpage');
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
-    const res = await fetch('https://backend.muskanthreading.com/api/aboutpage', {
+    const res = await fetch('https://muskan.infinitygalactech.com/api/aboutpage', {
       next: { revalidate: 3600 },
       signal: controller.signal,
       headers: {

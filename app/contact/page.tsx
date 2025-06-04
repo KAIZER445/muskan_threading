@@ -193,7 +193,7 @@ function transformApiData(apiData: ApiResponse['data']): ContactPageData {
 // Fetch data from the API
 async function fetchContactData(): Promise<ContactPageData> {
   try {
-    const res = await fetch('https://backend.muskanthreading.com/api/contactpage', {
+    const res = await fetch('https://muskan.infinitygalactech.com/api/contactpage', {
       next: { revalidate: 3600 }, // Revalidate every hour
       headers: { 'Accept': 'application/json' },
     });

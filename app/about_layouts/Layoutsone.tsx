@@ -12,7 +12,7 @@ interface LayoutOneProps {
 }
 
 export default function Layoutsone({ title, subtitle, description, image }: LayoutOneProps) {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muskan.infinitygalactech.com';
   console.log('Layoutsone Backend URL:', backendUrl);
 
   // Log incoming props for debugging
