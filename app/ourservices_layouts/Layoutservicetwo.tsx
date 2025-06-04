@@ -14,7 +14,7 @@ interface LayoutServiceTwoProps {
 }
 
 export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muskan.infinitygalactech.com';
 
   // Helper function to construct and validate image URL
   const getImageUrl = (image: string | null): string => {
