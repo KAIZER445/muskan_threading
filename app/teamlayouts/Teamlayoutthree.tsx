@@ -63,7 +63,7 @@ export default function Teamlayoutthree({
 }: TeamLayoutThreeProps) {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muskan.infinitygalactech.com';
 
   // Helper function to construct image URL
   const getImageUrl = (image: string | null, type: 'background' | 'overlay'): string | null => {
