@@ -56,8 +56,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         ],
   };
 
-  const siteUrl = 'https://muskan.infinitygalactech.com'; // Replace with your actual domain
-  const ogImage = `${siteUrl}/og-image.jpg`; // Replace with your actual OG image URL
+  const siteUrl = 'https://www.muskanthreading.com'; // Updated to your actual domain
+  const ogImage = `${siteUrl}/og-image.jpg`; // Ensure this image exists in your public directory
 
   return (
     <html lang="en">
