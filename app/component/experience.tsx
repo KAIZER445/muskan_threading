@@ -30,7 +30,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
           observer.unobserve(entry.target); // Stop observing after animation
         }
       },
-      { threshold: 0.1 } // Trigger when 10% of the section is visible
+      { threshold: 0.3 } // Trigger when 10% of the section is visible
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
