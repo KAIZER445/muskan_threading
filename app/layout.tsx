@@ -16,22 +16,20 @@ interface FooterData {
   powered_by_url?: string;
 }
 
-// Base metadata for default values
 export const metadata = {
-  title: 'Muskan Threading & Beauty Bar | Eyebrow Threading in California',
+  title: 'Muskan Threading | Eyebrow Threading in California',
   description:
-    'Expert eyebrow and facial threading at Muskan Threading & Beauty Bar in Rancho Santa Margarita and Mission Viejo, California. Book now for waxing, henna art, and more!',
+    'Expert eyebrow and facial threading at Muskan Threading in Rancho Santa Margarita and Mission Viejo, California. Book now for waxing, and more!',
   keywords:
-    'Muskan Threading, mukanthreading, eyebrow threading, facial threading, waxing, henna art, beauty salon, Rancho Santa Margarita, Mission Viejo, California',
+    'Muskan Threading, mukanthreading, eyebrow threading, facial threading, waxing, Rancho Santa Margarita, Mission Viejo, California',
 };
 
-// Define a type for children and params to support dynamic metadata
 export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params?: { location?: string }; // For dynamic routes like /rancho-santa-margarita
+  params?: { location?: string };
 }) {
   let footerData: FooterData = {
     useful_links: [
@@ -44,81 +42,62 @@ export default async function RootLayout({
 
   try {
     const res = await fetch('https://muskan.infinitygalactech.com/api/homepage', {
-      next: { revalidate: 600 }, // Cache for 10 minutes
+      next: { revalidate: 600 },
     });
-
-    if (!res.ok) {
-      throw new Error(`API request failed with status ${res.status}`);
+    if (res.ok) {
+      const response = await res.json();
+      const homeData = response?.data || {};
+      footerData = {
+        ...footerData,
+        description: homeData.main?.main_description || footerData.description,
+        useful_links: Array.isArray(homeData.footer?.useful_links)
+          ? homeData.footer.useful_links
+          : footerData.useful_links,
+      };
     }
-
-    const response = await res.json();
-    const homeData = response?.data || response;
-    footerData = {
-      ...footerData,
-      ...homeData?.footer,
-      useful_links: Array.isArray(homeData?.footer?.useful_links)
-        ? homeData.footer.useful_links
-        : footerData.useful_links,
-    };
   } catch (error) {
-    console.error('Error fetching footer data:', (error as Error).message);
+    console.error('Error fetching homepage API:', (error as Error).message);
   }
 
   const siteUrl = 'https://www.muskanthreading.com';
-  const ogImage = `${siteUrl}/images/og-image.jpg`; // Ensure this exists in /public/images
+  const ogImage = `${siteUrl}/images/og-image.jpg`; // Ensure this file exists
 
-  // Dynamic metadata for location-specific pages
-  const isLocationPage = params?.location;
+  const location = params?.location || '';
+  const isLocationPage = ['rancho-santa-margarita', 'mission-viejo'].includes(location);
   const locationName = isLocationPage
-    ? params.location === 'rancho-santa-margarita'
+    ? location === 'rancho-santa-margarita'
       ? 'Rancho Santa Margarita'
-      : params.location === 'mission-viejo'
-      ? 'Mission Viejo'
-      : 'California'
+      : 'Mission Viejo'
     : 'California';
   const dynamicTitle = isLocationPage
     ? `Muskan Threading | Eyebrow Threading in ${locationName}`
     : metadata.title;
   const dynamicDescription = isLocationPage
-    ? `Visit Muskan Threading in ${locationName} for expert eyebrow threading, facial threading, waxing, and henna art. Book your appointment today!`
+    ? `Visit Muskan Threading in ${locationName} for expert eyebrow threading, facial threading,and waxing. Book your appointment today!`
     : metadata.description;
 
   return (
     <html lang="en">
       <head>
-        {/* Essential Meta Tags */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={dynamicDescription} />
         <meta name="keywords" content={metadata.keywords} />
         <meta name="robots" content="index, follow" />
         <title>{dynamicTitle}</title>
-
-        {/* Canonical URL */}
-        <link
-          rel="canonical"
-          href={`${siteUrl}${isLocationPage ? `/${params?.location}` : ''}`}
-        />
-
-        {/* Favicon and App Icons */}
+        <link rel="canonical" href={`${siteUrl}${isLocationPage ? `/${location}` : ''}`} />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-        {/* Open Graph Tags */}
         <meta property="og:title" content={dynamicTitle} />
         <meta property="og:description" content={dynamicDescription} />
         <meta property="og:image" content={ogImage} />
-        <meta property="og:url" content={`${siteUrl}${isLocationPage ? `/${params?.location}` : ''}`} />
+        <meta property="og:url" content={`${siteUrl}${isLocationPage ? `/${location}` : ''}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Muskan Threading" />
-
-        {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={dynamicTitle} />
         <meta name="twitter:description" content={dynamicDescription} />
         <meta name="twitter:image" content={ogImage} />
-
-        {/* Structured Data for Local Business */}
         <Script
           id="local-business-schema"
           type="application/ld+json"
@@ -142,42 +121,32 @@ export default async function RootLayout({
                 ? {
                     '@type': 'PostalAddress',
                     streetAddress:
-                      params?.location === 'rancho-santa-margarita'
+                      location === 'rancho-santa-margarita'
                         ? '22461 Antonio Pkwy, Ste A150'
                         : '27660 Marguerite Pkwy, Ste D',
-                    addressLocality:
-                      params?.location === 'rancho-santa-margarita'
-                        ? 'Rancho Santa Margarita'
-                        : 'Mission Viejo',
+                    addressLocality: locationName,
                     addressRegion: 'CA',
-                    postalCode:
-                      params?.location === 'rancho-santa-margarita' ? '92688' : '92692',
+                    postalCode: location === 'rancho-santa-margarita' ? '92688' : '92692',
                     addressCountry: 'US',
                   }
                 : {
                     '@type': 'PostalAddress',
-                    streetAddress: footerData.contact_address || '22461 Antonio Pkwy, Ste A150',
+                    streetAddress: '22461 Antonio Pkwy, Ste A150',
                     addressLocality: 'Rancho Santa Margarita',
                     addressRegion: 'CA',
                     postalCode: '92688',
                     addressCountry: 'US',
                   },
               openingHours: ['Mo-Fr 10:00-18:00', 'Sa 10:00-17:00', 'Su 11:00-17:00'],
-              sameAs: [
-                'https://www.facebook.com/muskanthreading',
-                'https://www.instagram.com/muskanthreading',
-              ],
+              sameAs: ['https://www.facebook.com/muskanthreading', 'https://www.instagram.com/muskanthreading'],
             }),
           }}
         />
-
-        {/* Font Awesome Script */}
         <Script
           src="https://kit.fontawesome.com/bf4dece23b.js"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-
       </head>
       <body>
         <Navbar
