@@ -166,7 +166,7 @@ const ContactLayOne: React.FC<ContactLayOneProps> = ({
            Z"
         stroke="black" stroke-width="2" fill="none"/>
 
-
+    
   <path d="M240 60 
            Q250 55 255 65 
            Q252 80 240 90"
