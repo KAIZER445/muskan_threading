@@ -56,7 +56,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
               backgroundSize: 'cover'
             }}
           ></div>
-          <div className="md:pt-20 md:pb-30 md:ps-15 md:pe-60 p-20 z-5 relative">
+          <div className="sm:p-20 md:pt-20 md:pb-30 md:ps-15 md:pe-60 p-20 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_clay_masks_title || 'Clay Masks'}</h1>
             <p className="text-gray-600 mb-4">{services.services_clay_masks_description || 'Relax with our masks'}</p>
           </div>

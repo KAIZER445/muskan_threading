@@ -29,7 +29,7 @@ const Hero: React.FC<HeroProps> = ({ hero }) => {
     >
       <div className="container animate__backInDown mx-auto py-16 flex flex-col md:flex-row items-center relative">
 
-        <div className="ps-14 md:ps-67 md:pe-22">
+        <div className="ps-14 md:ps-0 lg:ps-67 lg:pe-22">
 
           <div className="flex items-center mb-4">
             <i className="fas fa-spa text-4xl text-white"></i>
