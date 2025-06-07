@@ -142,6 +142,7 @@ export default async function RootLayout({
             }),
           }}
         />
+        <meta name="google-site-verification" content="M5c0GEBk9fRNKISfxg2tgAFlnSri-rY4OZ9jv0UWFtw" />
         <Script
           src="https://kit.fontawesome.com/bf4dece23b.js"
           crossOrigin="anonymous"
