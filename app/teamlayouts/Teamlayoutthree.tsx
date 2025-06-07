@@ -39,11 +39,11 @@ const Counter = ({ value, label, suffix, isVisible }: CounterProps & { isVisible
 
   return (
     <div className="flex flex-col items-center" aria-live="polite">
-      <h2 className="text-3xl font-bold text-gray-800">
+      <h2 className="text-3xl font-bold text-white">
         {count}
         {value.replace(/[0-9]/g, '') || suffix} {/* Display original suffix or provided suffix */}
       </h2>
-      <p className="mt-2 text-gray-600">{label}</p>
+      <p className="mt-2 text-white">{label}</p>
     </div>
   );
 };
@@ -120,7 +120,7 @@ export default function Teamlayoutthree({
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <span className="text-2xl text-gray-500">No Background Image</span>
+              <span className="text-2xl text-white-500">No Background Image</span>
             </div>
           )}
         </div>
@@ -137,7 +137,7 @@ export default function Teamlayoutthree({
             />
           ) : (
             <div className="w-full h-full bg-gray-300 opacity-50 flex items-center justify-center">
-              <span className="text-2xl text-gray-600">No Overlay Image</span>
+              <span className="text-2xl text-white-600">No Overlay Image</span>
             </div>
           )}
         </div>
