@@ -39,11 +39,11 @@ const Counter = ({ value, label, suffix, isVisible }: CounterProps & { isVisible
 
   return (
     <div className="flex flex-col items-center" aria-live="polite">
-      <h2 className="text-3xl font-bold text-white-800">
+      <h2 className="text-3xl font-bold text-white">
         {count}
         {value.replace(/[0-9]/g, '') || suffix} {/* Display original suffix or provided suffix */}
       </h2>
-      <p className="mt-2 text-white-600">{label}</p>
+      <p className="mt-2 text-white">{label}</p>
     </div>
   );
 };
