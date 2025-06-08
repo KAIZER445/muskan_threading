@@ -61,7 +61,7 @@ export default function Layoutsone({ title, subtitle, description, image }: Layo
   return (
     <section
       ref={sectionRef}
-      className="container mx-auto lg:pt-10 lg:pb-0 py-10 flex flex-col md:flex-row px-2 lg:px-[30px] font-poppins"
+      className="container mx-auto pt-10 pb-10 sm:pb-0 flex flex-col md:flex-row px-2 lg:px-[30px] font-poppins"
     >
       {/* Left side - text */}
       <div className="w-full md:w-1/2 p-4">

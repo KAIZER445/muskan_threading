@@ -50,13 +50,13 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
   return (
     <div className="text-white">
       <footer
-        className="px-20 pt-17 pb-5 bg-gray-900"
+        className="md:px-20 lg:px-20 px-8  pt-17 pb-5 bg-gray-900"
         style={{
           backgroundImage: '',
           backgroundSize: 'cover',
         }}
       >
-        <div className="md:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
+        <div className="lg:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
           <div className="flex-1">
             <div className="flex items-center mb-3">
 <img src="/company-logo.png" className='w-[250px]' alt="" />

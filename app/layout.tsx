@@ -60,7 +60,8 @@ export default async function RootLayout({
   }
 
   const siteUrl = 'https://www.muskanthreading.com';
-  const ogImage = `${siteUrl}/images/og-image.jpg`; // Ensure this file exists
+  const logoUrl = `${siteUrl}/company-logo.png`; // Updated to use the new logo path
+  const logoAlt = 'Muskan Threading logo'; // Updated alt text to match your intent
 
   const location = params?.location || '';
   const isLocationPage = ['rancho-santa-margarita', 'mission-viejo'].includes(location);
@@ -90,14 +91,16 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta property="og:title" content={dynamicTitle} />
         <meta property="og:description" content={dynamicDescription} />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:image" content={logoUrl} />
+        <meta property="og:image:alt" content={logoAlt} />
         <meta property="og:url" content={`${siteUrl}${isLocationPage ? `/${location}` : ''}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Muskan Threading" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={dynamicTitle} />
         <meta name="twitter:description" content={dynamicDescription} />
-        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image" content={logoUrl} />
+        <meta name="twitter:image:alt" content={logoAlt} />
         <Script
           id="local-business-schema"
           type="application/ld+json"
@@ -105,10 +108,17 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'BeautySalon',
+              '@type': ['BeautySalon', 'WebSite'],
               name: 'Muskan Threading & Beauty Bar',
               url: siteUrl,
-              logo: footerData.logo_url || `${siteUrl}/images/logo.png`,
+              logo: logoUrl,
+              image: logoUrl,
+              description: dynamicDescription,
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://www.muskanthreading.com/search?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
               contactPoint: {
                 '@type': 'ContactPoint',
                 telephone: footerData.contact_phone || '(949) 858-8661',
@@ -139,6 +149,38 @@ export default async function RootLayout({
                   },
               openingHours: ['Mo-Fr 10:00-18:00', 'Sa 10:00-17:00', 'Su 11:00-17:00'],
               sameAs: ['https://www.facebook.com/muskanthreading', 'https://www.instagram.com/muskanthreading'],
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': 'https://www.muskanthreading.com',
+                name: dynamicTitle,
+                description: dynamicDescription,
+              },
+              hasPart: [
+                {
+                  '@type': 'WebPage',
+                  name: 'Our Services',
+                  url: 'https://www.muskanthreading.com/ourservices',
+                  description: 'Discover our expert eyebrow and facial threading services.',
+                },
+                {
+                  '@type': 'WebPage',
+                  name: 'Our Team',
+                  url: 'https://www.muskanthreading.com/teams',
+                  description: 'Meet the skilled professionals behind Muskan Threading.',
+                },
+                {
+                  '@type': 'WebPage',
+                  name: 'About Us',
+                  url: 'https://www.muskanthreading.com/about',
+                  description: 'Learn about our history and dedication to beauty services.',
+                },
+                {
+                  '@type': 'WebPage',
+                  name: 'Contact Us',
+                  url: 'https://www.muskanthreading.com/contact',
+                  description: 'Get in touch for bookings or inquiries at Muskan Threading.',
+                },
+              ],
             }),
           }}
         />
