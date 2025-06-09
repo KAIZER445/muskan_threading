@@ -60,8 +60,8 @@ export default async function RootLayout({
   }
 
   const siteUrl = 'https://www.muskanthreading.com';
-  const logoUrl = `${siteUrl}/company-logo.png`; // Updated to use the new logo path
-  const logoAlt = 'Muskan Threading logo'; // Updated alt text to match your intent
+  const logoUrl = `${siteUrl}/company-logo.png`; // Reverted to .png for rich snippets
+  const logoAlt = 'Muskan Threading Official Logo'; // Updated for clarity
 
   const location = params?.location || '';
   const isLocationPage = ['rancho-santa-margarita', 'mission-viejo'].includes(location);
@@ -87,8 +87,8 @@ export default async function RootLayout({
         <meta name="robots" content="index, follow" />
         <title>{dynamicTitle}</title>
         <link rel="canonical" href={`${siteUrl}${isLocationPage ? `/${location}` : ''}`} />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/company-logo.ico" type="image/x-icon" /> {/* Use new .ico as favicon */}
+        <link rel="apple-touch-icon" href="/company-logo.ico" /> {/* Optional for Apple devices */}
         <meta property="og:title" content={dynamicTitle} />
         <meta property="og:description" content={dynamicDescription} />
         <meta property="og:image" content={logoUrl} />
