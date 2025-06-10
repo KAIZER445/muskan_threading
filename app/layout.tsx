@@ -70,25 +70,50 @@ export default async function RootLayout({
       ? 'Rancho Santa Margarita'
       : 'Mission Viejo'
     : 'California';
+
+  // Determine pathname from params or fallback
+  const getCurrentPath = () => {
+    if (isLocationPage) return `/${location}`;
+    if (typeof window !== 'undefined' && window.location.pathname) return window.location.pathname;
+    return '/'; // Default for server-side rendering
+  };
+
+  // Dynamic descriptions based on route
+  const getDynamicDescription = (pathname: string) => {
+    switch (pathname) {
+      case '/ourservices':
+        return 'Discover expert eyebrow and facial threading services at Muskan Threading in Rancho Santa Margarita and Mission Viejo, California. Book now for waxing and more!';
+      case '/teams':
+        return 'Meet the skilled professionals behind Muskan Threading, offering expert threading services in Rancho Santa Margarita and Mission Viejo, California.';
+      case '/about':
+        return 'Learn about the history and dedication of Muskan Threading, your trusted threading studio in Rancho Santa Margarita and Mission Viejo, California.';
+      case '/contact':
+        return 'Get in touch with Muskan Threading for bookings or inquiries at our locations in Rancho Santa Margarita and Mission Viejo, California.';
+      default:
+        return isLocationPage
+          ? `Visit Muskan Threading in ${locationName} for expert eyebrow threading, facial threading, and waxing. Book your appointment today!`
+          : metadata.description;
+    }
+  };
+
   const dynamicTitle = isLocationPage
     ? `Muskan Threading | Eyebrow Threading in ${locationName}`
     : metadata.title;
-  const dynamicDescription = isLocationPage
-    ? `Visit Muskan Threading in ${locationName} for expert eyebrow threading, facial threading,and waxing. Book your appointment today!`
-    : metadata.description;
+  const currentPath = getCurrentPath();
+  const dynamicDescription = getDynamicDescription(currentPath);
 
   return (
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content={dynamicDescription} />
+        <meta name="description" content={dynamicDescription} /> {/* Single description tag */}
         <meta name="keywords" content={metadata.keywords} />
         <meta name="robots" content="index, follow" />
         <title>{dynamicTitle}</title>
         <link rel="canonical" href={`${siteUrl}${isLocationPage ? `/${location}` : ''}`} />
-        <link rel="icon" href="/company-logo.ico" type="image/x-icon" /> {/* Use new .ico as favicon */}
-        <link rel="apple-touch-icon" href="/company-logo.ico" /> {/* Optional for Apple devices */}
+        <link rel="icon" href="/company-logo.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/company-logo.ico" />
         <meta property="og:title" content={dynamicTitle} />
         <meta property="og:description" content={dynamicDescription} />
         <meta property="og:image" content={logoUrl} />

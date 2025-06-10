@@ -147,7 +147,7 @@ export default function Layoutsthree({
           <Image
             src={getImageUrl(image1)}
             alt={`${title} - Beauty service image 1`}
-            width={300}
+            width={350}
             height={384}
             className="w-full sm:w-1/3 h-60 sm:h-96 rounded-xl object-cover shadow-md"
             placeholder="blur"

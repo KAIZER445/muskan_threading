@@ -66,10 +66,10 @@ export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
               ) : null}
             </div>
             <div className="mt-2">
-              <h1 className="text-xl font-black">
+              <h2 className="text-xl font-black">
                 {String(index + 1).padStart(2, '0')}/
-              </h1>
-              <h2 className="text-xl font-black py-2">{service.title}</h2>
+              </h2>
+              <h3 className="text-xl font-black py-2">{service.title}</h3>
               <p className="text-sm text-justify py-1">{service.description}</p>
             </div>
           </div>

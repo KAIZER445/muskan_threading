@@ -32,7 +32,7 @@ const Teamlayoutone: React.FC<TeamLayoutOneProps> = ({
 
         {/* Right Side: Description */}
         <div className="text-left md:text-right text-gray-700 text-sm sm:text-base max-w-full md:max-w-xl">
-          <p>{description}</p>
+          <h1 className='text-base'>{description}</h1>
         </div>
       </div>
 

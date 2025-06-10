@@ -41,10 +41,10 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
   return (
     <div ref={sectionRef} className="py-8 md:px-15 font-poppins">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold">
+        <h2 className="text-4xl font-bold">
           <span className="pe-2">{main.main_title?.split(' ').slice(0, -2).join(' ') || 'Our Spa'}</span>
           <span className="text-purple-700">{main.main_title?.split(' ').slice(-2).join(' ') || 'Experience'}</span>
-        </h1>
+        </h2>
         <p className="text-gray-600 mt-4">{main.main_description || 'Discover our services'}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -71,7 +71,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
             }}
           ></div>
           <div className="md:pt-20 md:pb-30 md:ps-15 lg:pe-60 p-20 z-5 relative">
-            <h1 className="text-2xl font-bold mb-4">{services.services_wellness_spa_title || 'Wellness Spa'}</h1>
+            <h2 className="text-2xl font-bold mb-4">{services.services_wellness_spa_title || 'Wellness Spa'}</h2>
             <p className="text-gray-600 mb-4">{services.services_wellness_spa_description || 'Indulge in wellness'}</p>
           </div>
         </div>
