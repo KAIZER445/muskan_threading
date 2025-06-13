@@ -56,7 +56,7 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
               backgroundSize: 'cover'
             }}
           ></div>
-          <div className="sm:p-20 md:pt-20 md:pb-30 md:ps-15 lg:pe-60 p-20 z-5 relative">
+          <div className=" md:pt-20 md:pb-30 md:ps-15 lg:pe-60 py-10 ps-10 pe-30 z-5 relative">
             <h1 className="text-2xl font-bold mb-4">{services.services_clay_masks_title || 'Clay Masks'}</h1>
             <p className="text-gray-600 mb-4">{services.services_clay_masks_description || 'Relax with our masks'}</p>
           </div>
@@ -68,9 +68,10 @@ const SpaExperience: React.FC<SpaExperienceProps> = ({ main, services }) => {
               backgroundImage: `url(${services?.services_wellness_spa_image ? `https://muskan.infinitygalactech.com/public/storage/${services.services_wellness_spa_image}` : '/makeup.jpg'})`,
               backgroundSize: 'cover',
               backgroundPosition: 'left'
+              
             }}
           ></div>
-          <div className="md:pt-20 md:pb-30 md:ps-15 lg:pe-60 p-20 z-5 relative">
+          <div className=" md:pt-20 md:pb-30 md:ps-15 lg:pe-60 py-10 ps-10 pe-30 z-5 relative">
             <h2 className="text-2xl font-bold mb-4">{services.services_wellness_spa_title || 'Wellness Spa'}</h2>
             <p className="text-gray-600 mb-4">{services.services_wellness_spa_description || 'Indulge in wellness'}</p>
           </div>
