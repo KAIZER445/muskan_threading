@@ -26,9 +26,9 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
       { name: 'Our Team', url: '/teams' },
       { name: 'Contact Us', url: '/contact' },
     ],
-    contact_phone: '+(949) 858-8661 || (949) 347-0648',
+    contact_phone: '22461 Antonio Pkwy, #A150, R.S.M., CA 92688 || +(949) 858-8661 ',
     contact_email: 'info@mustachea.com',
-    contact_address: '22461 Antonio Pkwy, #A150, R.S.M., CA 92688 || 27660 Marguerite Pkwy, #D, Mission Viejo, CA 92692',
+    contact_address: '27660 Marguerite Pkwy, #D, Mission Viejo, CA 92692 || (949) 347-0648',
     powered_by: 'Infinitygalactech',
     powered_by_url: 'https://infinitygalactech.com',
   };
@@ -50,13 +50,13 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
   return (
     <div className="text-white">
       <footer
-        className="md:px-20 lg:px-20 px-8  pt-17 pb-5 bg-gray-900"
+        className="px-20 pt-17 pb-5 bg-gray-900"
         style={{
           backgroundImage: '',
           backgroundSize: 'cover',
         }}
       >
-        <div className="lg:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
+        <div className="md:px-21 flex flex-col md:flex-row justify-between items-start md:items-start space-y-8 md:space-y-0 md:space-x-8">
           <div className="flex-1">
             <div className="flex items-center mb-3">
 <img src="/company-logo.png" className='w-[250px]' alt="" />
@@ -77,12 +77,15 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
           </div>
           <div className="flex-1">
             <h2 className="text-xl font-bold mb-4 text-white mb-10">CONTACT US</h2>
-            <p className="mb-2 text-white">
-              <span className="font-bold">Phone:</span> {contact_phone}
+            <p className="mb-4 text-white">
+              <span className="font-bold">Address- 1 :</span> {contact_phone}
             </p>
-            <p className="mb-2 text-white">
-              <span className="font-bold">Address:</span>{' '}
+            <p className="mb-4 text-white">
+              <span className="font-bold">Address- 2 :</span>{' '}
               {contact_address}</p>
+            <p className="mb-2 text-white">
+              <span className="font-bold">E-mail :</span>{' '}
+              muskanthreading@gmail.com</p>
           </div>
         </div>
       </footer>
