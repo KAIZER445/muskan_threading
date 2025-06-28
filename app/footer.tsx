@@ -33,7 +33,7 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
     powered_by_url: 'https://infinitygalactech.com',
   };
 
-  // Use defaultFooterData if footerData is undefined, and merge with provided data
+  // Use defaultFooterData if footerData is undefined, and merge with provided data done
   const {
     logo_url = defaultFooterData.logo_url,
     logo_alt = defaultFooterData.logo_alt,
@@ -86,7 +86,7 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
             <p className="mb-2 text-white">
               <span className="font-bold">E-mail :</span>{' '}
               muskanthreading@gmail.com</p>
-          </div>
+          </div> 
         </div>
       </footer>
       <div className="bg-gray-900 py-4">
