@@ -26,9 +26,9 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
       { name: 'Our Team', url: '/teams' },
       { name: 'Contact Us', url: '/contact' },
     ],
-    contact_phone: '22461 Antonio Pkwy, #A150, R.S.M., CA 92688 || +(949) 858-8661 ',
+    contact_phone: '22461 Antonio Pkwy, Rancho Santa Margarita, CA 92688, United States || +(949) 858-8661 ',
     contact_email: 'info@mustachea.com',
-    contact_address: '27660 Marguerite Pkwy, #D, Mission Viejo, CA 92692 || (949) 347-0648',
+    contact_address: '27660 Marguerite Pkwy, Mission Viejo, CA 92692, United States || (949) 347-0648',
     powered_by: 'Infinitygalactech',
     powered_by_url: 'https://infinitygalactech.com',
   };
@@ -50,7 +50,7 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
   return (
     <div className="text-white">
       <footer
-        className="px-20 pt-17 pb-5 bg-gray-900"
+        className="md:px-20 px-10 pt-17 pb-5 bg-gray-900"
         style={{
           backgroundImage: '',
           backgroundSize: 'cover',
