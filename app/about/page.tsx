@@ -208,7 +208,7 @@ export default async function AboutPage() {
           description={data.layoutOne.description}
           image={data.layoutOne.image}
         />
-        {/* <Layoutstwo timeline={data.layoutTwo.timeline} /> */}
+        {/* <Layoutstwo timeline={data.layoutTwo.timeline} /> done */}
         <Layoutsthree
           title={data.layoutThree.title}
           description={data.layoutThree.description}
