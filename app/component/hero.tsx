@@ -49,11 +49,7 @@ const Hero: React.FC<HeroProps> = ({ hero }) => {
               alt={hero.hero_image_alt || 'A woman applying makeup with a brush'}
               className="rounded-full w-[500] h-[500] object-cover"
               style={{ boxShadow: boxShadowStyle }}
-              src={
-                hero.hero_image
-                  ? `https://muskan.infinitygalactech.com/public/storage/${hero.hero_image}`
-                  : '/default-hero.jpg'
-              }
+              src={hero.hero_image || '/makeup.jpg'}
             />
           </div>
         </div>

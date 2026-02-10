@@ -14,26 +14,9 @@ interface LayoutServiceTwoProps {
 }
 
 export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muskan.infinitygalactech.com';
-
-  // Helper function to construct and validate image URL
+  // Helper function to get image URL
   const getImageUrl = (image: string | null): string => {
-    if (!image || typeof image !== 'string' || image.trim() === '') {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Invalid or missing service image: ${image}`);
-      }
-      return ''; // Return empty string if no image
-    }
-
-    // Ensure the image path doesn't already contain the backend URL
-    const cleanImagePath = image.startsWith('http')
-      ? image // If it's already a full URL, use it as-is
-      : `${backendUrl}/public/storage/${image}`; // Construct the full URL
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`Constructed service image URL: ${cleanImagePath}`);
-    }
-    return cleanImagePath;
+    return image || '/makeup.jpg';
   };
 
   return (
@@ -49,19 +32,7 @@ export default function Layoutservicetwo({ services }: LayoutServiceTwoProps) {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover rounded-lg"
-                  onError={(e) => {
-                    if (process.env.NODE_ENV !== 'production') {
-                      console.error(`Failed to load image for ${service.title}: ${getImageUrl(service.image)}`);
-                    }
-                    e.currentTarget.style.display = 'none'; // Hide image on error
-                  }}
-                  onLoadingComplete={(img) => {
-                    if (process.env.NODE_ENV !== 'production') {
-                      console.log(
-                        `Image loaded for ${service.title}: ${img.naturalWidth}x${img.naturalHeight}px`
-                      );
-                    }
-                  }}
+
                 />
               ) : null}
             </div>

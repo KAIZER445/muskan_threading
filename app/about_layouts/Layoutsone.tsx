@@ -12,11 +12,6 @@ interface LayoutOneProps {
 }
 
 export default function Layoutsone({ title, subtitle, description, image }: LayoutOneProps) {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muskan.infinitygalactech.com';
-  console.log('Layoutsone Backend URL:', backendUrl);
-
-  // Log incoming props for debugging
-  console.log('Layoutsone Props:', { title, subtitle, description, image });
 
   // Reference for the section to observe
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -38,24 +33,9 @@ export default function Layoutsone({ title, subtitle, description, image }: Layo
     return () => observer.disconnect(); // Cleanup on unmount
   }, []);
 
-  // Helper function to construct image URL
+  // Helper function to get image URL
   const getImageUrl = (image: string | null): string => {
-    const defaultImage = '/default-about-hero.jpg';
-    if (!image || typeof image !== 'string' || image.trim() === '') {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Invalid or missing about image: ${image}. Using fallback: ${defaultImage}`);
-      }
-      return defaultImage;
-    }
-    const url = `${backendUrl}/public/storage/${image}`;
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`Constructed about image URL: ${url}`);
-      // Verify image URL accessibility
-      fetch(url, { method: 'HEAD' })
-        .then((res) => console.log(`Image URL ${url} is ${res.ok ? 'accessible' : 'inaccessible'} (Status: ${res.status})`))
-        .catch((err) => console.error(`Error accessing image URL ${url}:`, err));
-    }
-    return url;
+    return image || '/makeup.jpg';
   };
 
   return (

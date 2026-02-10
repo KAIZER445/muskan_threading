@@ -63,21 +63,10 @@ export default function Teamlayoutthree({
 }: TeamLayoutThreeProps) {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://muskan.infinitygalactech.com';
 
-  // Helper function to construct image URL
+  // Helper function to get image URL
   const getImageUrl = (image: string | null, type: 'background' | 'overlay'): string | null => {
-    if (!image || typeof image !== 'string' || image.trim() === '') {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Invalid or missing ${type} image: ${image}`);
-      }
-      return null; // Return null instead of default image
-    }
-    const url = `${backendUrl}/public/storage/${image}`;
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`Constructed ${type} image URL: ${url}`);
-    }
-    return url;
+    return image || null;
   };
 
   useEffect(() => {

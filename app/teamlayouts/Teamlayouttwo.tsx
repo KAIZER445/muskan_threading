@@ -23,21 +23,9 @@ interface TeamLayoutTwoProps {
 }
 
 const Teamlayouttwo: React.FC<TeamLayoutTwoProps> = ({ teamMembers }) => {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.muskanthreading.com';
-
-  // Helper function to construct image URL
+  // Helper function to get image URL
   const getImageUrl = (image: string | null): string | null => {
-    if (!image || typeof image !== 'string' || image.trim() === '') {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Invalid or missing image: ${image}`);
-      }
-      return null; // Return null instead of a default image
-    }
-    const url = `${backendUrl}/public/storage/${image}`;
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`Constructed image URL: ${url}`);
-    }
-    return url;
+    return image || null;
   };
 
   return (

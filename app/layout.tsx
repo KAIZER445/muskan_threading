@@ -31,33 +31,23 @@ export default async function RootLayout({
   children: React.ReactNode;
   params?: { location?: string };
 }) {
-  let footerData: FooterData = {
+  // Static footer data - replace with your own content
+  const footerData: FooterData = {
+    logo_url: '/company-logo.png',
+    logo_alt: 'Muskan Threading Logo',
+    description: 'Expert eyebrow and facial threading services in California',
     useful_links: [
       { name: 'Our Services', url: '/ourservices' },
       { name: 'About Us', url: '/about' },
       { name: 'Our Team', url: '/teams' },
       { name: 'Contact Us', url: '/contact' },
     ],
+    contact_phone: '(949) 858-8661',
+    contact_email: 'info@muskanthreading.com',
+    contact_address: '22461 Antonio Pkwy, Ste A150, Rancho Santa Margarita, CA 92688',
+    powered_by: 'Muskan Threading',
+    powered_by_url: 'https://www.muskanthreading.com',
   };
-
-  try {
-    const res = await fetch('https://muskan.infinitygalactech.com/api/homepage', {
-      next: { revalidate: 600 },
-    });
-    if (res.ok) {
-      const response = await res.json();
-      const homeData = response?.data || {};
-      footerData = {
-        ...footerData,
-        description: homeData.main?.main_description || footerData.description,
-        useful_links: Array.isArray(homeData.footer?.useful_links)
-          ? homeData.footer.useful_links
-          : footerData.useful_links,
-      };
-    }
-  } catch (error) {
-    console.error('Error fetching homepage API:', (error as Error).message);
-  }
 
   const siteUrl = 'https://www.muskanthreading.com';
   const logoUrl = `${siteUrl}/company-logo.png`; // Reverted to .png for rich snippets

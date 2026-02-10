@@ -57,7 +57,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
                 alt={`Customer ${i + 1}`}
                 className="w-10 h-10 rounded-full border-2 border-white -ml-2"
                 height="40"
-                src={img ? `https://muskan.infinitygalactech.com/public/storage/${img}` : '/default-avatar.png'}
+                src={img || '/makeup.jpg'}
                 width="40"
               />
             ))}
@@ -83,8 +83,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
             <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-8">
               <img
                 alt={`Profile picture of ${testimonials.testimonials_1_name || 'Customer'}`}
-                className="w-16 h-16 rounded-full border-2 border-purple-700"
-                src={testimonials.testimonials_1_image ? `https://muskan.infinitygalactech.com/public/storage/${testimonials.testimonials_1_image}` : '/default-avatar.png'}
+                className="w-16 h-16 rounded-full border-2 border-purple-700 object-cover"
+                src={testimonials.testimonials_1_image || '/makeup.jpg'}
               />
             </div>
             <div className="mt-10">
@@ -107,8 +107,9 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
             <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-8">
               <img
                 alt={`Profile picture of ${testimonials.testimonials_2_name || 'Customer'}`}
-                className="w-16 h-16 rounded-full border-2 border-purple-700"
-                src={testimonials.testimonials_2_image ? `https://muskan.infinitygalactech.com/public/storage/${testimonials.testimonials_2_image}` : '/default-avatar.png'}
+                className="w-16 h-16 rounded-full border-2 border-purple-700 object-cover"
+                src={testimonials.testimonials_2_image || '/makeup.jpg'}
+                
               />
             </div>
             <div className="mt-10">
