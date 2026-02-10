@@ -15,21 +15,25 @@ export const metadata = {
 export default function ContactPage() {
   // Static data - replace with your own content
   const hero = {
-    title: 'Contact Us',
-    description: 'Get in touch with us for appointments or inquiries!',
-    services: ['Threading', 'Eyebrow Shaping', 'Facial Threading', 'Waxing'],
+    title: 'Get In Touch With Muskan Threading & Beauty Bar',
+    description: 'Have questions, need more information, or ready to schedule an appointment? We\'re here to help and would be delighted to connect with you. Whether you\'re seeking expert guidance, have specific inquiries, or simply want to explore how we can support your beauty goals, don\'t hesitate to get in touch. Reach out to us today — our friendly and dedicated team is just a message away. Let\'s start the conversation and make something great happen together!',
+    services: [
+      'Eyebrow Threading',
+      'Facial Threading',
+      'Waxing Services'
+    ],
     addressLines: [
-      'Location #1: 123 Main Street, City, State 12345',
-      'Location #2: 456 Oak Avenue, City, State 67890'
+      'Location #1: 22461 Antonio Pkwy, Ste A150, Rancho Santa Margarita, CA 92688',
+      'Location #2: 27660 Marguerite Pkwy, Ste D, Mission Viejo, CA 92692'
     ],
     openingHours: [
-      { day: 'Monday', time: '10:00 AM - 7:00 PM' },
-      { day: 'Tuesday', time: '10:00 AM - 7:00 PM' },
-      { day: 'Wednesday', time: '10:00 AM - 7:00 PM' },
-      { day: 'Thursday', time: '10:00 AM - 7:00 PM' },
-      { day: 'Friday', time: '10:00 AM - 8:00 PM' },
-      { day: 'Saturday', time: '9:00 AM - 8:00 PM' },
-      { day: 'Sunday', time: '11:00 AM - 6:00 PM' },
+      { day: 'Monday', time: '10:00 AM - 6:00 PM' },
+      { day: 'Tuesday', time: '10:00 AM - 6:00 PM' },
+      { day: 'Wednesday', time: '10:00 AM - 6:00 PM' },
+      { day: 'Thursday', time: '10:00 AM - 6:00 PM' },
+      { day: 'Friday', time: '10:00 AM - 6:00 PM' },
+      { day: 'Saturday', time: '10:00 AM - 5:00 PM' },
+      { day: 'Sunday', time: '11:00 AM - 5:00 PM' },
     ] as OpeningHour[],
   };
 

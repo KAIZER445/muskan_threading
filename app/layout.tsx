@@ -35,16 +35,16 @@ export default async function RootLayout({
   const footerData: FooterData = {
     logo_url: '/company-logo.png',
     logo_alt: 'Muskan Threading Logo',
-    description: 'Expert eyebrow and facial threading services in California',
+    description: 'At Muskan Threading, we specialize in precise, gentle hair removal that enhances your natural beauty. Our skilled technicians use traditional threading techniques to shape perfect brows and provide smooth, radiant skin.',
     useful_links: [
       { name: 'Our Services', url: '/ourservices' },
       { name: 'About Us', url: '/about' },
       { name: 'Our Team', url: '/teams' },
       { name: 'Contact Us', url: '/contact' },
     ],
-    contact_phone: '(949) 858-8661',
+    contact_phone: '22461 Antonio Pkwy, Rancho Santa Margarita, CA 92688, United States || +(949) 858-8661',
     contact_email: 'info@muskanthreading.com',
-    contact_address: '22461 Antonio Pkwy, Ste A150, Rancho Santa Margarita, CA 92688',
+    contact_address: '27660 Marguerite Pkwy, Mission Viejo, CA 92692, United States || (949) 347-0648',
     powered_by: 'Muskan Threading',
     powered_by_url: 'https://www.muskanthreading.com',
   };

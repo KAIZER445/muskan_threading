@@ -96,7 +96,7 @@ export default function Teamlayoutthree({
 
   return (
     <div ref={sectionRef} className="container mx-auto lg:pt-20 pt-8 relative ">
-      <div className="relative w-full overflow-hidden" style={{ height: `${Math.max(20, counters.length * 7)}rem` }}>
+      <div className="relative w-full overflow-hidden" style={{ height: `${Math.max(20, counters.length * 6)}rem` }}>
         {/* Background Image or Placeholder */}
         <div className="absolute inset-0 z-0">
           {backgroundUrl ? (

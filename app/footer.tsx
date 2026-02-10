@@ -19,15 +19,15 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
   const defaultFooterData: FooterData = {
     logo_url: 'https://storage.googleapis.com/a1aa/image/nsDonQZpOC_iGqYaLLjOPci7TduirUJcttEx53cD3Z0.jpg',
     logo_alt: 'Muskan Threading logo',
-    description: 'Transform your look with our expert threading services, designed for flawless brows and smooth skin.',
+    description: 'At Muskan Threading, we specialize in precise, gentle hair removal that enhances your natural beauty. Our skilled technicians use traditional threading techniques to shape perfect brows and provide smooth, radiant skin.',
     useful_links: [
       { name: 'Our Services', url: '/ourservices' },
       { name: 'About Us', url: '/about' },
       { name: 'Our Team', url: '/teams' },
       { name: 'Contact Us', url: '/contact' },
     ],
-    contact_phone: '22461 Antonio Pkwy, Rancho Santa Margarita, CA 92688, United States || +(949) 858-8661 ',
-    contact_email: 'info@mustachea.com',
+    contact_phone: '22461 Antonio Pkwy, Rancho Santa Margarita, CA 92688, United States || +(949) 858-8661',
+    contact_email: 'muskanthreading@gmail.com',
     contact_address: '27660 Marguerite Pkwy, Mission Viejo, CA 92692, United States || (949) 347-0648',
     powered_by: 'Infinitygalactech',
     powered_by_url: 'https://infinitygalactech.com',
@@ -78,7 +78,7 @@ const Footer: React.FC<{ footerData?: FooterData }> = ({ footerData }) => {
           <div className="flex-1">
             <h2 className="text-xl font-bold mb-4 text-white mb-10">CONTACT US</h2>
             <p className="mb-4 text-white">
-              <span className="font-bold">Address- 1 :</span> {contact_phone}
+              <span className="font-bold">Address- 1 :</span> {' '} {contact_phone}
             </p>
             <p className="mb-4 text-white">
               <span className="font-bold">Address- 2 :</span>{' '}

@@ -6,26 +6,26 @@ import Features from './component/features';
 export default function Page() {
   // Static data - replace with your own content
   const hero = {
-    hero_title: 'Welcome to Muskan',
+    hero_title: 'Precision Threading at Muskan',
     hero_button_text: 'Book Now',
     hero_image: '/hero.jpg',
-    hero_description: 'Experience the best beauty and spa services',
+    hero_description: 'Transform your look with our expert threading services, designed for flawless brows and smooth skin.',
     hero_button_link: '/contact',
     hero_image_alt: 'A woman applying makeup with a brush'
   };
 
   const main = {
-    main_title: 'Our Spa Experience',
-    main_description: 'Discover our premium services designed to rejuvenate and refresh you'
+    main_title: 'Your TrustedThreading Studio',
+    main_description: 'We specialize in precise, gentle hair removal that enhances your natural beauty. Our skilled technicians use traditional threading techniques to shape perfect brows and provide smooth, radiant skin.'
   };
 
   const services = {
-    services_clay_masks_title: 'Clay Masks',
-    services_clay_masks_description: 'Relax with our premium clay mask treatments',
+    services_clay_masks_title: 'Eyebrow Threading',
+    services_clay_masks_description: 'Achieve perfectly shaped eyebrows with our expert threading, tailored to your face shape and style preferences.',
     services_clay_masks_image: '/Untitled-1.jpg',
     services_clay_masks_link: '/ourservices',
-    services_wellness_spa_title: 'Wellness Spa',
-    services_wellness_spa_description: 'Indulge in our complete wellness spa experience',
+    services_wellness_spa_title: 'Facial Threading',
+    services_wellness_spa_description: 'Remove unwanted facial hair with our gentle threading technique, leaving your skin smooth and flawless.',
     services_wellness_spa_image: '/Untitled-2.jpg',
     services_wellness_spa_link: '/ourservices'
   };
@@ -40,7 +40,7 @@ export default function Page() {
     testimonials_1_rating: '5',
     testimonials_1_name: 'Sarah Johnson',
     testimonials_1_image: '/user.png',
-    testimonials_2_description: 'Best spa experience I have ever had. Highly recommend to everyone!',
+    testimonials_2_description: 'The facial threading was so quick and gentle. My skin feels amazing!',
     testimonials_2_rating: '5',
     testimonials_2_name: 'Emily Davis',
     testimonials_2_image: '/user.png'
