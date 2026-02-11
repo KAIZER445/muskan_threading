@@ -31,7 +31,7 @@ export default function AboutPage() {
     ],
     image1: '/pic-1-about.jpg',
     image2: '/pic-2-about.jpg',
-    towel_icon: '/towel-icon.png',
+    towel_icon: '',
   };
 
   return (

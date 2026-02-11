@@ -1,4 +1,4 @@
-import Contactlayone from '../contact_layouts/Contactlayone';
+import Contactlayone from '../contact_layouts/ContactlayoneNew';
 
 // Define the expected data structure for components
 interface OpeningHour {

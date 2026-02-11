@@ -44,7 +44,7 @@ export default async function RootLayout({
     ],
     contact_phone: '22461 Antonio Pkwy, Rancho Santa Margarita, CA 92688, United States || +(949) 858-8661',
     contact_email: 'info@muskanthreading.com',
-    contact_address: '27660 Marguerite Pkwy, Mission Viejo, CA 92692, United States || (949) 347-0648',
+    contact_address: '27660 Marguerite Pkwy, Mission Viejo, CA 92692, United States || +(949) 347-0648',
     powered_by: 'Muskan Threading',
     powered_by_url: 'https://www.muskanthreading.com',
   };

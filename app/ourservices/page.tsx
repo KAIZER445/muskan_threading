@@ -28,7 +28,7 @@ export default function ServicesPage() {
     {
       title: 'Eyebrow Threading',
       description: 'Professional eyebrow shaping and threading for perfectly defined brows.',
-      image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=300&fit=crop',
+      image: '/service-1.png',
       link: '/contact',
     },
     {
@@ -70,7 +70,7 @@ export default function ServicesPage() {
     {
       title: 'Half Cheek Threading',
       description: 'Partial cheek hair removal for a smooth and balanced facial aesthetic.',
-      image: 'https://images.unsplash.com/photo-1596704017254-9b121068ec31?w=400&h=300&fit=crop',
+      image: './services-3.jpg',
       link: '/contact',
     },
     {
@@ -82,7 +82,7 @@ export default function ServicesPage() {
     {
       title: 'Forehead Threading',
       description: 'Hair removal or grooming for the forehead area, ensuring a smooth and even skin tone.',
-      image: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&h=300&fit=crop',
+      image: './services-4.jpg',
       link: '/contact',
     },
     {
